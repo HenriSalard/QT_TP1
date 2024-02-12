@@ -1,0 +1,7 @@
+<User>
+ <User ID="User0" Password="password0"/>
+ <User ID="User1" Password="password1"/>
+ <User ID="User2" Password="password2"/>
+ <User ID="User3" Password="password3"/>
+ <User ID="User4" Password="password4"/>
+</User>
