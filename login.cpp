@@ -20,7 +20,7 @@ Login::~Login()
 
 void Login::ReadUser(){
     QDomDocument userXML;
-    QFile xmlFile("C:/Users/Registered user/Documents/Plateformes_cpp_tp1/myXML/myXML.xml");
+    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
     if (!xmlFile.open(QIODevice::ReadOnly))
     {
         qDebug() << "Failed to open the file for reading.";
@@ -57,13 +57,15 @@ void Login::on_loginButton_clicked()
     QString username = ui->lineEdit_username->text();
     QString password = ui->lineEdit_password->text();
 
+    bool find = false;
+
     for(User us : vUser){
         if(username.toStdString() ==  us.getId() && password.toStdString() == us.getPassword()) {
             QMessageBox::information(this, "Login", "Username and password is correct");
-            //hide();
+            find = true;
         }
     }
-    QMessageBox::warning(this,"Login", "Username and password is not correct");
+    if(!find)   QMessageBox::warning(this,"Login", "Username and password is not correct");
 }
 
 
