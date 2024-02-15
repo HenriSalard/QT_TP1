@@ -2,6 +2,7 @@
 #define NEWUSER_H
 
 #include <QDialog>
+#include "user.h"
 
 namespace Ui {
 class newUser;
@@ -13,6 +14,8 @@ class newUser : public QDialog
 
 public:
     explicit newUser(QWidget *parent = nullptr, bool isFirstConnection = false);
+    void savetoXML(User user);
+    void saveUserXML(User user);
     ~newUser();
 
 private:
