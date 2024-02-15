@@ -12,7 +12,7 @@ class newUser : public QDialog
     Q_OBJECT
 
 public:
-    explicit newUser(QWidget *parent = nullptr);
+    explicit newUser(QWidget *parent = nullptr, bool isFirstConnection = false);
     ~newUser();
 
 private:

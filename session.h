@@ -6,12 +6,19 @@
 
 class Session
 {
+private:
+    User usedUser;
+    Profil usedProfil;
+
+
 public:
     Session();
+    Session(User user);
 
 
-private:
-    User user;
+
+    void setUsedProfil(const Profil &newUsedProfil);
+    User getUsedUser() const;
 };
 
 #endif // SESSION_H

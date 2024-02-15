@@ -4,12 +4,15 @@
 #include "login.h"
 using namespace std;
 
-newUser::newUser(QWidget *parent)
+newUser::newUser(QWidget *parent, bool isFirstConnection )
     : QDialog(parent)
     , ui(new Ui::newUser)
 {
     ui->setupUi(this);
+    ui->backButton->setVisible(!isFirstConnection);
+    std::cout<<"test " << isFirstConnection<<"\n";
 }
+
 
 newUser::~newUser()
 {

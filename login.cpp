@@ -69,8 +69,17 @@ void Login::on_loginButton_clicked()
 
 void Login::on_createButton_clicked()
 {
-    newUser* nu = new newUser();
-    nu->show();
-    this->setVisible(false);
+
+    if(vUser.length() <= 1){
+        newUser* nu = new newUser(this, true);
+        nu->show();
+        this->setVisible(true);
+    }
+    else{
+        newUser* nu = new newUser(this, false);
+        nu->show();
+        this->setVisible(false);
+    }
+
 }
 
