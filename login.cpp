@@ -75,7 +75,7 @@ void Login::on_createButton_clicked()
     if(vUser.length() <= 1){
         newUser* nu = new newUser(this, true);
         nu->show();
-        this->setVisible(true);
+        this->setVisible(false);
     }
     else{
         newUser* nu = new newUser(this, false);

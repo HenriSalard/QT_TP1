@@ -7,18 +7,18 @@
 class Session
 {
 private:
-    User usedUser;
+    User *usedUser;
     Profil usedProfil;
 
 
 public:
     Session();
-    Session(User user);
+    Session(User *user);
 
 
 
     void setUsedProfil(const Profil &newUsedProfil);
-    User getUsedUser() const;
+    User* getUsedUser() const;
 };
 
 #endif // SESSION_H

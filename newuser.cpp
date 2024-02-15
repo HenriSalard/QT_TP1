@@ -2,6 +2,9 @@
 #include "ui_newuser.h"
 #include "user.h"
 #include "login.h"
+#include "Accueil.h"
+#include "Session.h"
+
 using namespace std;
 
 newUser::newUser(QWidget *parent, bool isFirstConnection )
@@ -10,7 +13,6 @@ newUser::newUser(QWidget *parent, bool isFirstConnection )
 {
     ui->setupUi(this);
     ui->backButton->setVisible(!isFirstConnection);
-    std::cout<<"test " << isFirstConnection<<"\n";
 }
 
 
@@ -89,10 +91,19 @@ void newUser::on_pushButton_clicked(){
         ui->labelError->setText("Erreur, veuillez remplir tous les champs");
     }
     else{
-        User newUser = User(newId.toStdString(), newPassword.toStdString());
+        User *newUser = new User(newId.toStdString(), newPassword.toStdString());
+        Session *session = new Session(newUser);
+
+        Accueil* accueil = new Accueil(this, session);
+        accueil->show();
+        this->setVisible(false);
 
 
     }
+
+    // TODO Serialisation de l'utilisateur
+
+
 }
 
 
