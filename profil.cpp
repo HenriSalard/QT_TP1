@@ -2,5 +2,5 @@
 
 
 Profil::Profil(){
-    listDroits = new QVector<Droits>;
+    listDroits = QVector<Droits>();
 }

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         user.setAttribute("ID", "User" + QString::number(i));
         root.appendChild(user);
     }
-    QFile file("myXLM.xml");
+    QFile file("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         qDebug() << "Open the file for writing failed";

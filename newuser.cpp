@@ -65,15 +65,50 @@ void newUser::savetoXML(User user){
 
 void newUser::saveUserXML(User user){
 
-    QFile file("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    QDomDocument dom("myXML");
+    QFile doc_xml("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    if(!doc_xml.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Open the file for writing failed";
+        QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");
+        doc_xml.close();
+        return;
     }
-    else
+    if(!dom.setContent(&doc_xml))
     {
-        //Add user to xml
+        QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");
+        doc_xml.close();
+        return;
     }
+    doc_xml.close();
+
+    QDomElement docElem = dom.documentElement();
+
+    QDomElement write_elem = dom.createElement("User");
+
+    write_elem.setAttribute("ID", QString::fromStdString(user.getId()));
+    write_elem.setAttribute("Password", QString::fromStdString(user.getPassword()));
+
+    docElem.appendChild(write_elem);
+
+    QString write_doc = dom.toString();
+
+    std::cout << write_doc.toStdString();
+
+
+    QFile fichier("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    if(!fichier.open(QIODevice::WriteOnly))
+    {
+        fichier.close();
+        QMessageBox::critical(this,"Erreur","Impossible d'écrire dans le document XML");
+        return;
+    }
+
+    QTextStream stream(&fichier);
+
+    stream << write_doc;
+
+    fichier.close();
+
 
 }
 
@@ -86,8 +121,7 @@ void newUser::on_pushButton_clicked(){
         ui->labelError->setText("Erreur, veuillez remplir tous les champs");
     }
     else{
-        User newUser = User(newId.toStdString(), newPassword.toStdString());
-
+        savetoXML(User(newId.toStdString(), newPassword.toStdString()));
 
     }
 }

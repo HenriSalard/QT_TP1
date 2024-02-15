@@ -4,4 +4,5 @@
  <User ID="User2" Password="password2"/>
  <User ID="User3" Password="password3"/>
  <User ID="User4" Password="password4"/>
+ <User ID="Miaou" Password="Tom"/>
 </User>
