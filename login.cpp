@@ -5,6 +5,7 @@
 #include "user.h"
 #include "session.h"
 #include "accueil.h"
+#include <iostream>
 
 Login::Login(QWidget *parent)
     : QDialog(parent)
@@ -32,14 +33,14 @@ void Login::on_loginButton_clicked()
             QMessageBox::warning(this,"Login", "Username and password are not correct");
         }
         else{
-            QMessageBox::information(this, "Login", "Username and password is correct");
+            QMessageBox::information(this, "Login", "Username and password are correct");
             User *newUser = new User(username.toStdString(),password.toStdString());
             newUser->setListProfils();
             Session *session = new Session(newUser);
 
-            Accueil* accueil = new Accueil(this, session);
+            Accueil* accueil = new Accueil(nullptr, session);
             accueil->show();
-            this->setVisible(false);
+            this->close();
         }
     }
 
@@ -48,16 +49,15 @@ void Login::on_loginButton_clicked()
 
 void Login::on_createButton_clicked()
 {
-
     if(GestXML::CountUserXML() <= 1){
-        newUser* nu = new newUser(this, true);
+        newUser* nu = new newUser(nullptr, true);
         nu->show();
-        this->setVisible(false);
+        this->close();
     }
     else{
-        newUser* nu = new newUser(this, false);
+        newUser* nu = new newUser(nullptr, false);
         nu->show();
-        this->setVisible(false);
+        this->close();
     }
 
 }

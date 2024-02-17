@@ -15,6 +15,8 @@ public:
     Profil();
     string getName();
     void setName(string name);
+    void addDroit(Droits droit);
+    bool hasRight(Droits droit);
 };
 
 #endif // PROFIL_H

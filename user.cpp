@@ -6,12 +6,18 @@ User::User() {
     identifiant = nullptr;
     password = nullptr;
     listProfils = QVector<Profil>();
+    listProfils.append(Profil());
+    listProfils[0].setName("base");
+    listProfils[0].addDroit(Droits::Read);
 }
 
 User::User(string s1, string s2) {
     identifiant = s1;
     password = s2;
     listProfils = QVector<Profil>();
+    listProfils.append(Profil());
+    listProfils[0].setName("base");
+    listProfils[0].addDroit(Droits::Read);
 }
 
 string User::getId(){
@@ -28,4 +34,8 @@ QVector<Profil> User::getListProfils(){
 
 void User::setListProfils(){
     listProfils = GestXML::GetUserProfil(identifiant);
+}
+
+void User::addProfil(Profil profilToAdd){
+
 }

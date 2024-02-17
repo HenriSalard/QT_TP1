@@ -26,6 +26,8 @@ public:
 
     void setListProfils();
 
+    void addProfil(Profil profilToAdd);
+
 };
 
 #endif // USER_H

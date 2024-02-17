@@ -12,6 +12,7 @@ public:
     GestXML();
 
     static bool FindUserXML(User user);
+    static bool UserExistsXML(User user);
     static int SaveUserXML(User user);
     static unsigned int CountUserXML();
     static QVector<Profil> GetUserProfil(string id);
