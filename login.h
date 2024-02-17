@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QtXml>
-#include "user.h"
+
 
 namespace Ui {
 class Login;

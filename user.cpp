@@ -1,4 +1,5 @@
 #include "user.h"
+#include "gestxml.h"
 
 User::User() {
 
@@ -19,4 +20,12 @@ string User::getId(){
 
 string User::getPassword(){
     return password;
+}
+
+QVector<Profil> User::getListProfils(){
+    return listProfils;
+}
+
+void User::setListProfils(){
+    listProfils = GestXML::GetUserProfil(identifiant);
 }

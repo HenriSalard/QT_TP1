@@ -1,0 +1,11 @@
+<Profil>
+ <UserProfil UserId="Baptiste" ProfilName="Bat1">
+  <Profil Read="true" Write="true" Create_user="true" Manage_users="true"/>
+ </UserProfil>
+ <UserProfil UserId="Baptiste" ProfilName="Bat2">
+  <Profil Read="true" Write="true" Create_user="false" Manage_users="false"/>
+ </UserProfil>
+ <UserProfil UserId="User0" ProfilName="User0">
+  <Profil Read="false" Write="false" Create_user="false" Manage_users="false"/>
+ </UserProfil>
+</Profil>

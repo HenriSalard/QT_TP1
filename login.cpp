@@ -2,6 +2,9 @@
 #include "gestxml.h"
 #include "newuser.h"
 #include "ui_login.h"
+#include "user.h"
+#include "session.h"
+#include "accueil.h"
 
 Login::Login(QWidget *parent)
     : QDialog(parent)
@@ -30,7 +33,13 @@ void Login::on_loginButton_clicked()
         }
         else{
             QMessageBox::information(this, "Login", "Username and password is correct");
-            //TODO page d'accueil
+            User *newUser = new User(username.toStdString(),password.toStdString());
+            newUser->setListProfils();
+            Session *session = new Session(newUser);
+
+            Accueil* accueil = new Accueil(this, session);
+            accueil->show();
+            this->setVisible(false);
         }
     }
 
@@ -40,7 +49,7 @@ void Login::on_loginButton_clicked()
 void Login::on_createButton_clicked()
 {
 
-    if(vUser.length() <= 1){
+    if(GestXML::CountUserXML() <= 1){
         newUser* nu = new newUser(this, true);
         nu->show();
         this->setVisible(false);

@@ -22,6 +22,10 @@ public:
 
     string getPassword();
 
+    QVector<Profil> getListProfils();
+
+    void setListProfils();
+
 };
 
 #endif // USER_H

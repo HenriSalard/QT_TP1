@@ -89,3 +89,70 @@ int GestXML::SaveUserXML(User user){
     return 0;
 
 }
+
+unsigned int GestXML::CountUserXML(){
+
+    unsigned int count = 0;
+
+    QDomDocument userXML;
+    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    while(node.isNull() == false)
+    {
+
+        if(node.tagName() == "User"){
+            count++;
+        }
+        node = node.nextSibling().toElement();
+    }
+
+
+    //std::cout<<"Count "<<count;
+    return count;
+
+}
+
+QVector<Profil> GestXML::GetUserProfil(string id){
+
+    QVector<Profil> vProfil;
+
+    QDomDocument userXML;
+    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/UserProfil.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    while(node.isNull() == false)
+    {
+        if(node.tagName() == "UserProfil"){
+
+            QString idXML = node.attribute("UserId");
+            QString name = node.attribute("ProfilName");
+
+            if(idXML.toStdString() == id){
+
+                Profil profil;
+                profil.setName(name.toStdString());
+                vProfil.append(profil);
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+    return vProfil;
+
+}

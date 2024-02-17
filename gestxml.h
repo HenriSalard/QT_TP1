@@ -13,6 +13,8 @@ public:
 
     static bool FindUserXML(User user);
     static int SaveUserXML(User user);
+    static unsigned int CountUserXML();
+    static QVector<Profil> GetUserProfil(string id);
 };
 
 #endif // GESTXML_H
