@@ -15,7 +15,6 @@ class newUser : public QDialog
 public:
     explicit newUser(QWidget *parent = nullptr);
     void savetoXML(User user);
-    void saveUserXML(User user);
 
     ~newUser();
 

@@ -2,6 +2,7 @@
 #include "ui_newuser.h"
 #include "user.h"
 #include "login.h"
+#include "gestxml.h"
 using namespace std;
 
 newUser::newUser(QWidget *parent)
@@ -18,97 +19,18 @@ newUser::~newUser()
 
 void newUser::savetoXML(User user){
 
-    QDomDocument userXML;
-    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
-    if (!xmlFile.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "Failed to open the file for reading.";
-    }
-    userXML.setContent(&xmlFile);
-    xmlFile.close();
+    if(!GestXML::FindUserXML(user)){
 
-    QDomElement root = userXML.documentElement();
-    QDomElement node = root.firstChild().toElement();
-
-    QVector<User> vUser;
-
-    while(node.isNull() == false)
-    {
-
-        if(node.tagName() == "User"){
-            while(!node.isNull()){
-                qDebug() << node.tagName();
-                QString id = node.attribute("ID");
-                QString password = node.attribute("Password");
-
-                User user = User(id.toStdString(),password.toStdString());
-
-                vUser.append(user);
-
-                node = node.nextSibling().toElement();
-            }
-        }
-        node = node.nextSibling().toElement();
-    }
-
-    bool find = false;
-
-    for(User us : vUser){
-        if(user.getId()==us.getId()){
-            QMessageBox::warning(this,"Create", "This user aready exists!");
-            find = true;
+        switch(GestXML::SaveUserXML(user)){
+            case 1 : QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");
+            case 2 : QMessageBox::critical(this,"Erreur","Impossible d'écrire dans le document XML");
+            default:
+                QMessageBox::information(this,"User","L'utilisateur a bien été ajouté");
         }
     }
-    if(!find) saveUserXML(user);
-
-}
-
-void newUser::saveUserXML(User user){
-
-    QDomDocument dom("myXML");
-    QFile doc_xml("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
-    if(!doc_xml.open(QIODevice::ReadOnly))
-    {
-        QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");
-        doc_xml.close();
-        return;
+    else{
+        QMessageBox::warning(this,"Create", "This user aready exists!");
     }
-    if(!dom.setContent(&doc_xml))
-    {
-        QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");
-        doc_xml.close();
-        return;
-    }
-    doc_xml.close();
-
-    QDomElement docElem = dom.documentElement();
-
-    QDomElement write_elem = dom.createElement("User");
-
-    write_elem.setAttribute("ID", QString::fromStdString(user.getId()));
-    write_elem.setAttribute("Password", QString::fromStdString(user.getPassword()));
-
-    docElem.appendChild(write_elem);
-
-    QString write_doc = dom.toString();
-
-    std::cout << write_doc.toStdString();
-
-
-    QFile fichier("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
-    if(!fichier.open(QIODevice::WriteOnly))
-    {
-        fichier.close();
-        QMessageBox::critical(this,"Erreur","Impossible d'écrire dans le document XML");
-        return;
-    }
-
-    QTextStream stream(&fichier);
-
-    stream << write_doc;
-
-    fichier.close();
-
 
 }
 

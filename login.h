@@ -25,10 +25,7 @@ private slots:
 
 private:
     Ui::Login *ui;
-    QVector<User> vUser;
 
-protected:
-    void ReadUser();
 };
 
 #endif // LOGIN_H
