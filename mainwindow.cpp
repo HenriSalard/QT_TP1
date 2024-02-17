@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    unNouvelUtilisateur = new newUser();
+
 
     unNouvelUtilisateur->show();
 
@@ -21,5 +21,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    unNouvelUtilisateur = new newUser(this,true);
     unNouvelUtilisateur->show();
 }

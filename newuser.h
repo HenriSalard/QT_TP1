@@ -13,9 +13,8 @@ class newUser : public QDialog
     Q_OBJECT
 
 public:
-    explicit newUser(QWidget *parent = nullptr);
+    explicit newUser(QWidget *parent = nullptr, bool isFirstConnection = false);
     void savetoXML(User user);
-
     ~newUser();
 
 private:

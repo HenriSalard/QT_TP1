@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     gestxml.cpp \
+    accueil.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    accueil.h \
     droits.h \
     gestxml.h \
     login.h \
@@ -30,6 +32,7 @@ HEADERS += \
     user.h
 
 FORMS += \
+    accueil.ui \
     login.ui \
     mainwindow.ui \
     newuser.ui

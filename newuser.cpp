@@ -3,14 +3,19 @@
 #include "user.h"
 #include "login.h"
 #include "gestxml.h"
+#include "Accueil.h"
+#include "Session.h"
+
 using namespace std;
 
-newUser::newUser(QWidget *parent)
+newUser::newUser(QWidget *parent, bool isFirstConnection )
     : QDialog(parent)
     , ui(new Ui::newUser)
 {
     ui->setupUi(this);
+    ui->backButton->setVisible(!isFirstConnection);
 }
+
 
 newUser::~newUser()
 {
@@ -44,8 +49,18 @@ void newUser::on_pushButton_clicked(){
     }
     else{
         savetoXML(User(newId.toStdString(), newPassword.toStdString()));
+        User *newUser = new User(newId.toStdString(), newPassword.toStdString());
+        Session *session = new Session(newUser);
+
+        Accueil* accueil = new Accueil(this, session);
+        accueil->show();
+        this->setVisible(false);
 
     }
+
+    // TODO Serialisation de l'utilisateur
+
+
 }
 
 
