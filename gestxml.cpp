@@ -169,7 +169,7 @@ QVector<Profil> GestXML::GetUserProfil(string id){
     QVector<Profil> vProfil;
 
     QDomDocument userXML;
-    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
+    QFile xmlFile("../QT_TP1/myXML/UserProfil.xml");
     if (!xmlFile.open(QIODevice::ReadOnly))
     {
         qDebug() << "Failed to open the file for reading.";
@@ -198,4 +198,48 @@ QVector<Profil> GestXML::GetUserProfil(string id){
     }
     return vProfil;
 
+}
+
+/**
+ * @brief Recupere la liste des utilisateurs depuis le fichier XML
+ * @return vUsers QVector contenant les utilisateurs
+ */
+QVector<User> GestXML::GetAllUsers(){
+    QVector<User> vUsers;
+
+
+    QDomDocument userXML;
+    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    // Parcours des utilisateurs
+    while(!node.isNull())
+    {
+
+        if(node.tagName() == "User"){
+            while(!node.isNull()){
+                QString readId = node.attribute("ID");
+                QString password = node.attribute("Password");
+
+                // Creation de l'utilisateur et ajout au QVector
+                vUsers.append(User(readId.toStdString(),
+                                   password.toStdString()));
+
+                node = node.nextSibling().toElement();
+
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+        node = node.nextSibling().toElement();
+
+    return vUsers;
 }

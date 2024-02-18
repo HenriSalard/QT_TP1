@@ -17,8 +17,10 @@ SOURCES += \
     mainwindow.cpp \
     newuser.cpp \
     profil.cpp \
+    profils_manager.cpp \
     session.cpp \
-    user.cpp
+    user.cpp \
+    userslist.cpp
 
 HEADERS += \
     accueil.h \
@@ -28,14 +30,18 @@ HEADERS += \
     mainwindow.h \
     newuser.h \
     profil.h \
+    profils_manager.h \
     session.h \
-    user.h
+    user.h \
+    userslist.h
 
 FORMS += \
     accueil.ui \
     login.ui \
     mainwindow.ui \
-    newuser.ui
+    newuser.ui \
+    profils_manager.ui \
+    userslist.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

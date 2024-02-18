@@ -15,6 +15,10 @@ void Profil::setName(string nameParam){
 
 }
 
+QVector<Droits> Profil::getListDroits(){
+    return listDroits;
+}
+
 void Profil::addDroit(Droits droit){
     listDroits.append(droit);
 }

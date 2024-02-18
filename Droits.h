@@ -7,8 +7,8 @@
 enum class Droits{
     Read,
     Write,
-    Create_user,
-    Manage_users
+    Create_profils,
+    Manage_profils
 };
 
 #endif // DROITS_H

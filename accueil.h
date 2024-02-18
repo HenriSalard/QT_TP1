@@ -23,9 +23,8 @@ class Accueil : public QDialog
 
     private slots:
         void on_validateButton_clicked();
-
-
-
+        void on_disconnectButton_clicked();
+        void on_profilsButton_clicked();
 
 };
 
