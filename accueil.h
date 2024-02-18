@@ -21,6 +21,10 @@ class Accueil : public QDialog
         explicit Accueil(QWidget *parent = nullptr, Session *session = nullptr);
         ~Accueil();
 
+    private slots:
+        void on_validateButton_clicked();
+        void on_disconnectButton_clicked();
+        void on_profilsButton_clicked();
 
 };
 

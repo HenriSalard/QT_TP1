@@ -15,6 +15,9 @@ public:
     Profil();
     string getName();
     void setName(string name);
+    QVector<Droits> getListDroits();
+    void addDroit(Droits droit);
+    bool hasRight(Droits droit);
 };
 
 #endif // PROFIL_H

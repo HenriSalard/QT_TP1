@@ -10,7 +10,7 @@ bool GestXML::FindUserXML(User user){
     bool userFound = false;
 
     QDomDocument userXML;
-    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
     if (!xmlFile.open(QIODevice::ReadOnly))
     {
         qDebug() << "Failed to open the file for reading.";
@@ -44,12 +44,55 @@ bool GestXML::FindUserXML(User user){
     return userFound;
 
 }
+/**
+ * @brief Checks if a user exists in the xml file
+ * @param user   The user to search
+ * @return userFound  true if the user exists, false otherwise
+ */
+
+bool GestXML::UserExistsXML(User user){
+
+    bool userFound = false;
+
+    QDomDocument userXML;
+    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    while(node.isNull() == false)
+    {
+
+        if(node.tagName() == "User"){
+            while(!node.isNull()){
+                QString readId = node.attribute("ID");
+
+                if(user.getId() == readId.toStdString()){
+
+                    userFound = true;
+
+                }
+                node = node.nextSibling().toElement();
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+
+    return userFound;
+
+}
 
 int GestXML::SaveUserXML(User user){
 
 
     QDomDocument dom("myXML");
-    QFile doc_xml("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    QFile doc_xml("../QT_TP1/myXML/myXML.xml");
     if(!doc_xml.open(QIODevice::ReadOnly))
     {
         doc_xml.close();
@@ -73,7 +116,7 @@ int GestXML::SaveUserXML(User user){
 
     QString write_doc = dom.toString();
 
-    QFile fichier("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    QFile fichier("../QT_TP1/myXML/myXML.xml");
     if(!fichier.open(QIODevice::WriteOnly))
     {
         fichier.close();
@@ -95,7 +138,7 @@ unsigned int GestXML::CountUserXML(){
     unsigned int count = 0;
 
     QDomDocument userXML;
-    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/myXML.xml");
+    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
     if (!xmlFile.open(QIODevice::ReadOnly))
     {
         qDebug() << "Failed to open the file for reading.";
@@ -126,7 +169,7 @@ QVector<Profil> GestXML::GetUserProfil(string id){
     QVector<Profil> vProfil;
 
     QDomDocument userXML;
-    QFile xmlFile("C:/Users/Registered user/Documents/QT_TP1/myXML/UserProfil.xml");
+    QFile xmlFile("../QT_TP1/myXML/UserProfil.xml");
     if (!xmlFile.open(QIODevice::ReadOnly))
     {
         qDebug() << "Failed to open the file for reading.";
@@ -155,4 +198,48 @@ QVector<Profil> GestXML::GetUserProfil(string id){
     }
     return vProfil;
 
+}
+
+/**
+ * @brief Recupere la liste des utilisateurs depuis le fichier XML
+ * @return vUsers QVector contenant les utilisateurs
+ */
+QVector<User> GestXML::GetAllUsers(){
+    QVector<User> vUsers;
+
+
+    QDomDocument userXML;
+    QFile xmlFile("../QT_TP1/myXML/myXML.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    // Parcours des utilisateurs
+    while(!node.isNull())
+    {
+
+        if(node.tagName() == "User"){
+            while(!node.isNull()){
+                QString readId = node.attribute("ID");
+                QString password = node.attribute("Password");
+
+                // Creation de l'utilisateur et ajout au QVector
+                vUsers.append(User(readId.toStdString(),
+                                   password.toStdString()));
+
+                node = node.nextSibling().toElement();
+
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+        node = node.nextSibling().toElement();
+
+    return vUsers;
 }

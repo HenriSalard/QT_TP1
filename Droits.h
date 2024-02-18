@@ -1,18 +1,14 @@
 #ifndef DROITS_H
 #define DROITS_H
 
-class Droits{
-
-private:
-    enum rights {
-        Read,
-        Write,
-        Create_user,
-        manage_users
-    };
-
-public:
-
+/**
+ * @brief Liste les droits existants
+ */
+enum class Droits{
+    Read,
+    Write,
+    Create_profils,
+    Manage_profils
 };
 
 #endif // DROITS_H

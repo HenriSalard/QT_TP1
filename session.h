@@ -4,6 +4,9 @@
 #include "user.h"
 //#include "profil.h"
 
+/**
+ * @brief Instancie la session qui contient l'utilisateur connecté ainsi que le profil utilisé
+ */
 class Session
 {
 private:
@@ -19,6 +22,7 @@ public:
 
     void setUsedProfil(const Profil &newUsedProfil);
     User* getUsedUser() const;
+    Profil getUsedProfil() const;
 };
 
 #endif // SESSION_H
