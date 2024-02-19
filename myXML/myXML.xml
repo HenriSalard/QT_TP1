@@ -8,4 +8,9 @@
  <User ID="test" Password="test"/>
  <User ID="test2" Password="test2"/>
  <User ID="Baptiste" Password="1234"/>
+ <User ID="Test4" Password="Test4"/>
+ <User ID="zbs" Password="eb&lt;d"/>
+ <User ID="ndt d gr" Password="&lt;d"/>
+ <User ID="b&lt;d&lt;f" Password="b&lt;terzren"/>
+ <User ID="eb&lt;dv&lt;er&lt;r" Password="bdfsw"/>
 </User>

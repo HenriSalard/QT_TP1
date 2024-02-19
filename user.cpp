@@ -39,3 +39,12 @@ void User::setListProfils(){
 void User::addProfil(Profil profilToAdd){
     listProfils.append(profilToAdd);
 }
+
+Profil User::getProfil(string name){
+    for(Profil profil : listProfils){
+        if(profil.getName() == name){
+            return profil;
+        }
+    }
+    return Profil();
+}

@@ -28,6 +28,8 @@ public:
 
     void addProfil(Profil profilToAdd);
 
+    Profil getProfil(string name);
+
 };
 
 #endif // USER_H

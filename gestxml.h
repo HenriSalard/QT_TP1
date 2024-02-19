@@ -26,6 +26,8 @@ public:
     static unsigned int CountUserXML();
     static QVector<Profil> GetUserProfil(string id);
 
+    static void ChangeUserProfil(User user);
+
 
 
      /**

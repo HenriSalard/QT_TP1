@@ -187,10 +187,31 @@ QVector<Profil> GestXML::GetUserProfil(string id){
             QString idXML = node.attribute("UserId");
             QString name = node.attribute("ProfilName");
 
+            QDomElement nodeChild = node.firstChildElement("Profil");
+
+            QString Read = nodeChild.attribute("Read");
+            QString Write = nodeChild.attribute("Write");
+            QString Create_user = nodeChild.attribute("Create_user");
+            QString Manage_users = nodeChild.attribute("Manage_users");
+
             if(idXML.toStdString() == id){
 
                 Profil profil;
                 profil.setName(name.toStdString());
+
+                if(Read.toStdString() == "true"){
+                    profil.addDroit(Droits::Read);
+                }
+                if(Write.toStdString() == "true"){
+                    profil.addDroit(Droits::Write);
+                }
+                if(Create_user.toStdString() == "true"){
+                    profil.addDroit(Droits::Create_profils);
+                }
+                if(Manage_users.toStdString() == "true"){
+                    profil.addDroit(Droits::Manage_profils);
+                }
+
                 vProfil.append(profil);
             }
         }
@@ -230,8 +251,10 @@ QVector<User> GestXML::GetAllUsers(){
                 QString password = node.attribute("Password");
 
                 // Creation de l'utilisateur et ajout au QVector
-                vUsers.append(User(readId.toStdString(),
-                                   password.toStdString()));
+                User user = User(readId.toStdString(),
+                                 password.toStdString());
+                user.setListProfils();
+                vUsers.append(user);
 
                 node = node.nextSibling().toElement();
 
@@ -239,7 +262,106 @@ QVector<User> GestXML::GetAllUsers(){
         }
         node = node.nextSibling().toElement();
     }
-        node = node.nextSibling().toElement();
+    node = node.nextSibling().toElement();
 
     return vUsers;
+}
+
+void GestXML::ChangeUserProfil(User user){
+
+    QDomDocument userProfilXML;
+    QFile xmlFile("../QT_TP1/myXML/UserProfil.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userProfilXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userProfilXML.documentElement();
+    QDomNodeList nodes = userProfilXML.elementsByTagName("UserProfil");
+
+    // Parcours des userProfil
+    for(int i = 0; i< nodes.count(); i++)
+    {
+        QDomNode node = nodes.item(i);
+
+        if(node.nodeType() == QDomNode::ElementNode)
+        {
+            QDomElement element = node.toElement();
+
+            QString idUser = element.attribute("UserId");
+            QString nameProfil = element.attribute("ProfilName");
+
+            //Si c'est le bon utilisateur
+            if(idUser.toStdString() == user.getId()){
+
+                //On récupère le bon profil
+                Profil profil = user.getProfil(nameProfil.toStdString());
+
+                //On crée un nouveau noeud
+                QDomElement newNodeTag = userProfilXML.createElement(QString("UserProfil"));
+                newNodeTag.setAttribute("UserId", QString::fromStdString(user.getId()));
+                newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil.getName()));
+
+                //On crée le fils du nouveau noeud
+                QDomElement newProfilNode = userProfilXML.createElement(QString("Profil"));
+
+                if(profil.hasRight(Droits::Read)){
+                    newProfilNode.setAttribute("Read", QString("true"));
+                }
+                else{
+                    newProfilNode.setAttribute("Read", QString("false"));
+                }
+
+                if(profil.hasRight(Droits::Write)){
+                    newProfilNode.setAttribute("Write", QString("true"));
+                }
+                else{
+                    newProfilNode.setAttribute("Write", QString("false"));
+                }
+
+                if(profil.hasRight(Droits::Create_profils)){
+                    newProfilNode.setAttribute("Create_user", QString("true"));
+                }
+                else{
+                    newProfilNode.setAttribute("Create_user", QString("false"));
+                }
+
+                if(profil.hasRight(Droits::Manage_profils)){
+                    newProfilNode.setAttribute("Manage_users", QString("true"));
+                }
+                else{
+                    newProfilNode.setAttribute("Manage_users", QString("false"));
+                }
+
+                //On attribue le profil au noeud userProfil
+                newNodeTag.appendChild(newProfilNode);
+
+                //On remplace l'ancien noeud
+                root.replaceChild(newNodeTag,node);
+            }
+
+        }
+
+    }
+
+    //On réécrit le XML
+    QString write_doc = userProfilXML.toString();
+
+    QFile fichier("../QT_TP1/myXML/USerProfil.xml");
+    if(!fichier.open(QIODevice::WriteOnly))
+    {
+        fichier.close();
+        qDebug()<<"Erreur d'ouverture de fichier";
+    }
+
+    QTextStream stream(&fichier);
+
+    stream << write_doc;
+
+    fichier.close();
+
+    qDebug()<<"Profils modifiés";
+
 }
