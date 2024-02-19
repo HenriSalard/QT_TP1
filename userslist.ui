@@ -54,7 +54,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Gestion des profils</string>
+    <string>Liste des utilisateurs</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

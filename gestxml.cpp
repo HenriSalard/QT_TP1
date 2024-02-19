@@ -5,6 +5,11 @@ GestXML::GestXML()
 
 }
 
+/**
+* @brief Checks if a user with the right password exists in the xml file
+* @param user   The user to search
+* @return userFound  true if the user exists and the password is correct, false otherwise
+*/
 bool GestXML::FindUserXML(User user){
 
     bool userFound = false;
@@ -44,12 +49,12 @@ bool GestXML::FindUserXML(User user){
     return userFound;
 
 }
+
 /**
  * @brief Checks if a user exists in the xml file
  * @param user   The user to search
  * @return userFound  true if the user exists, false otherwise
  */
-
 bool GestXML::UserExistsXML(User user){
 
     bool userFound = false;
@@ -88,6 +93,11 @@ bool GestXML::UserExistsXML(User user){
 
 }
 
+/**
+* @brief Add an user to the xml file
+* @param user   The user to add
+* @return error code
+*/
 int GestXML::SaveUserXML(User user){
 
 
@@ -133,6 +143,10 @@ int GestXML::SaveUserXML(User user){
 
 }
 
+/**
+* @brief Count the number of User in the XML file
+* @return count  number of User
+*/
 unsigned int GestXML::CountUserXML(){
 
     unsigned int count = 0;
@@ -164,6 +178,11 @@ unsigned int GestXML::CountUserXML(){
 
 }
 
+/**
+ * @brief Get all the profiles from a single user in the XML file
+ * @param id of the user
+ * @return vProfil the vector containing all the user's profiles
+ */
 QVector<Profil> GestXML::GetUserProfil(string id){
 
     QVector<Profil> vProfil;
@@ -267,6 +286,10 @@ QVector<User> GestXML::GetAllUsers(){
     return vUsers;
 }
 
+/**
+* @brief Update all the profiles of a single user in the XML
+* @param user the user to update
+*/
 void GestXML::ChangeUserProfil(User user){
 
     QDomDocument userProfilXML;

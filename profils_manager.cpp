@@ -5,6 +5,7 @@
 #include "profil.h"
 #include "accueil.h"
 #include "login.h"
+#include "userslist.h"
 
 profils_manager::profils_manager(QWidget *parent, Session * session, User selectedUser)
     : QDialog(parent)
@@ -97,3 +98,11 @@ void profils_manager::on_logOutButton_clicked(){
     delete session;
     this->close();
 }
+
+void profils_manager::on_backButton_clicked()
+{
+    UsersList *userslist = new UsersList(nullptr,session);
+    userslist->show();
+    this->close();
+}
+

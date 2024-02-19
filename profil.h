@@ -12,11 +12,41 @@ private:
     QVector<Droits> listDroits ;
 
 public:
+
+    /**
+    * @brief Create a profil with zero right
+     */
     Profil();
+
+    /**
+    * @brief Return the name of the profil
+    * @return name
+    */
     string getName();
+
+    /**
+    * @brief Change the profil name
+    * @param nameParam the new name
+    */
     void setName(string name);
+
+    /**
+    * @brief Return all the rights from the profil
+    * @return listDroits
+    */
     QVector<Droits> getListDroits();
+
+    /**
+     * @brief add rightd to the profil
+    * @param droit the right to be added
+    */
     void addDroit(Droits droit);
+
+    /**
+    * @brief Profil::hasRight Dit si le profil possede le droit renseigné
+    * @param droit
+    * @return true si le profil a le droit, false sinon
+    */
     bool hasRight(Droits droit);
 };
 

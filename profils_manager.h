@@ -24,6 +24,8 @@ private slots:
     void on_accueilButton_clicked();
     void on_logOutButton_clicked();
 
+    void on_backButton_clicked();
+
 private:
     Ui::profils_manager *ui;
     Session *session;
