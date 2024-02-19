@@ -5,7 +5,9 @@
 #include <iostream>
 using namespace std;
 
-
+/**
+ * @brief Instancie les utilisateurs
+ */
 class User
 {
 private:
@@ -27,6 +29,8 @@ public:
     void setListProfils();
 
     void addProfil(Profil profilToAdd);
+
+    Profil getProfil(string name);
 
 };
 

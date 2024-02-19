@@ -10,6 +10,9 @@ namespace Ui {
 class Login;
 }
 
+/**
+ * @brief Classe Controller de la vue Login
+ */
 class Login : public QDialog
 {
     Q_OBJECT

@@ -5,6 +5,7 @@
 #include "profil.h"
 #include "accueil.h"
 #include "login.h"
+#include "userslist.h"
 
 profils_manager::profils_manager(QWidget *parent, Session * session, User selectedUser)
     : QDialog(parent)
@@ -25,7 +26,10 @@ profils_manager::~profils_manager()
 }
 
 
-
+/**
+ * @brief Rempli le tableau avec les profils de l'utilisateur selectionne
+ * @param profils La liste des profils
+ */
 void profils_manager::fillTable(const QVector<Profil> profils){
     ui->tableWidget->setRowCount(profils.size());
     ui->tableWidget->setColumnCount(5); // nombre de droits existants + 1
@@ -84,16 +88,30 @@ void profils_manager::fillTable(const QVector<Profil> profils){
 
 }
 
-
+/**
+ * @brief Renvoie vers l'accueil
+ */
 void profils_manager::on_accueilButton_clicked(){
     Accueil *accueil = new Accueil(nullptr, session);
     accueil->show();
     this->close();
 
 }
+
+/**
+* @brief Quand le bouton deconnexion est clique, on supprime la session et on renvoie à la page de login
+*/
 void profils_manager::on_logOutButton_clicked(){
     Login *login = new Login();
     login->show();
     delete session;
     this->close();
 }
+
+void profils_manager::on_backButton_clicked()
+{
+    UsersList *userslist = new UsersList(nullptr,session);
+    userslist->show();
+    this->close();
+}
+

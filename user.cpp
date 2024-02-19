@@ -17,7 +17,7 @@ User::User(string s1, string s2) {
     listProfils = QVector<Profil>();
     listProfils.append(Profil());
     listProfils[0].setName("base");
-    listProfils[0].addDroit(Droits::Manage_profils); // juste le temps des tests après on remplacera par read
+    listProfils[0].addDroit(Droits::Read);
 }
 
 string User::getId(){
@@ -38,4 +38,13 @@ void User::setListProfils(){
 
 void User::addProfil(Profil profilToAdd){
     listProfils.append(profilToAdd);
+}
+
+Profil User::getProfil(string name){
+    for(Profil profil : listProfils){
+        if(profil.getName() == name){
+            return profil;
+        }
+    }
+    return Profil();
 }

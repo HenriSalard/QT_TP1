@@ -10,6 +10,11 @@ Accueil::Accueil(QWidget *parent)
     ui->setupUi(this);
 }
 
+/**
+ * @brief Constructeur de Accueil utilisé en pratique
+ * @param parent    Fenetre parent
+ * @param session   Pointeur vers session en cours
+ */
 Accueil::Accueil(QWidget *parent, Session *session)
     : QDialog(parent)
     , ui(new Ui::Accueil)
@@ -30,13 +35,18 @@ Accueil::Accueil(QWidget *parent, Session *session)
 }
 
 
-
+/**
+ * @brief Selectionne le profil à utiliser
+ */
 void Accueil::on_validateButton_clicked(){
     int selected_profile_index = ui->profilCombo->currentIndex();
     session->setUsedProfil(session->getUsedUser()->getListProfils()[selected_profile_index]);
     ui->profilsButton->setVisible(session->getUsedProfil().hasRight(Droits::Manage_profils));
 }
 
+/**
+ * @brief Quand le bouton deconnexion est clique, on supprime la session et on renvoie à la page de login
+ */
 void Accueil::on_disconnectButton_clicked(){
     Login *login = new Login();
     login->show();

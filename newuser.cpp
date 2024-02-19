@@ -66,7 +66,9 @@ void newUser::on_pushButton_clicked(){
         ui->labelError->setText("Erreur, veuillez remplir tous les champs");
     }
     else{
-        savetoXML(User(newId.toStdString(), newPassword.toStdString()));
+        User newUser = User(newId.toStdString(), newPassword.toStdString());
+        savetoXML(newUser);
+        GestXML::AddUserProfil(newUser,newUser.getProfil("base"));
 
     }
 

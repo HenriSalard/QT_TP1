@@ -20,8 +20,22 @@ public:
 
 
 
+    /**
+     * @brief Change the profil of the user
+    * @param newUsedProfil
+    */
     void setUsedProfil(const Profil &newUsedProfil);
+
+    /**
+    * @brief Session::getUsedUser
+    * @return user of the Session
+    */
     User* getUsedUser() const;
+
+    /**
+    * @brief Session::getUsedProfil
+    * @return the current profil of the User
+    */
     Profil getUsedProfil() const;
 };
 
