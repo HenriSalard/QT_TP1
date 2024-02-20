@@ -4,6 +4,10 @@
 #include <QDialog>
 #include "session.h"
 
+
+/**
+ * Classe Controller de la vue ProfilsManager
+ */
 namespace Ui {
 class profils_manager;
 }
@@ -21,7 +25,13 @@ public:
     void fillTable(const QVector<Profil> profils);
 
 private slots:
+
+    /**
+     * @brief Renvoie vers l'accueil
+     */
     void on_accueilButton_clicked();
+
+
     void on_logOutButton_clicked();
 
     void on_backButton_clicked();

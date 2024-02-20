@@ -4,6 +4,9 @@
 #include <QDialog>
 #include "user.h"
 
+/**
+ * Classe Controller de la vue NewUser
+ */
 namespace Ui {
 class newUser;
 }

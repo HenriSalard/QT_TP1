@@ -2,7 +2,7 @@
 #define DROITS_H
 
 /**
- * @brief Liste les droits existants
+ * @brief enumeration des droits existants
  */
 enum class Droits{
     Read,

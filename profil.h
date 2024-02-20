@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/**
+ * @brief Classe qui instancie les differents profils
+ */
 class Profil {
 private:
     string name;

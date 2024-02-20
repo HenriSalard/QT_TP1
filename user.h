@@ -5,7 +5,9 @@
 #include <iostream>
 using namespace std;
 
-
+/**
+ * @brief Instancie les utilisateurs
+ */
 class User
 {
 private:

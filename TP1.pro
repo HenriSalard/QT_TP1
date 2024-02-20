@@ -14,7 +14,6 @@ SOURCES += \
     accueil.cpp \
     login.cpp \
     main.cpp \
-    mainwindow.cpp \
     newuser.cpp \
     profil.cpp \
     profils_manager.cpp \
@@ -27,7 +26,6 @@ HEADERS += \
     droits.h \
     gestxml.h \
     login.h \
-    mainwindow.h \
     newuser.h \
     profil.h \
     profils_manager.h \
@@ -38,7 +36,6 @@ HEADERS += \
 FORMS += \
     accueil.ui \
     login.ui \
-    mainwindow.ui \
     newuser.ui \
     profils_manager.ui \
     userslist.ui

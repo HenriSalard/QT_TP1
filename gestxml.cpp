@@ -316,6 +316,7 @@ void GestXML::ChangeUserProfil(User user){
             QString idUser = element.attribute("UserId");
             QString nameProfil = element.attribute("ProfilName");
 
+
             //Si c'est le bon utilisateur
             if(idUser.toStdString() == user.getId()){
 
@@ -386,5 +387,49 @@ void GestXML::ChangeUserProfil(User user){
     fichier.close();
 
     qDebug()<<"Profils modifiés";
+
+}
+
+void GestXML::AddUserProfil(User user,Profil profil){
+
+    //TODO : finish
+    QDomDocument dom("myXML");
+    QFile doc_xml("../QT_TP1/myXML/UserProfil.xml");
+    if(!doc_xml.open(QIODevice::ReadOnly))
+    {
+        doc_xml.close();
+        return;
+    }
+    if(!dom.setContent(&doc_xml))
+    {
+        doc_xml.close();
+        return;
+    }
+    doc_xml.close();
+
+    QDomElement docElem = dom.documentElement();
+
+    QDomElement newNodeTag = dom.createElement(QString("UserProfil"));
+    newNodeTag.setAttribute("UserId", QString::fromStdString(user.getId()));
+    newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil.getName()));
+
+    docElem.appendChild(newNodeTag);
+
+    QString write_doc = dom.toString();
+
+    QFile fichier("../QT_TP1/myXML/UserProfil.xml");
+    if(!fichier.open(QIODevice::WriteOnly))
+    {
+        fichier.close();
+        return;
+    }
+
+    QTextStream stream(&fichier);
+
+    stream << write_doc;
+
+    fichier.close();
+
+    return;
 
 }

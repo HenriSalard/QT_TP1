@@ -6,6 +6,9 @@
 #include <QMessageBox>
 #include <QtXml>
 
+/**
+ * @brief Contient les fonctions de lecture-ecriture des fichiers XML
+ */
 class GestXML
 {
 public:
@@ -57,6 +60,8 @@ public:
      * @param user the user to update
      */
     static void ChangeUserProfil(User user);
+
+    static void AddUserProfil(User user,Profil profil);
 
 
 };
