@@ -1,21 +1,4 @@
 <User>
- <User ID="User0" Password="password0"/>
- <User ID="User1" Password="password1"/>
- <User ID="User2" Password="password2"/>
- <User ID="User3" Password="password3"/>
- <User ID="User4" Password="password4"/>
- <User ID="Miaou" Password="Tom"/>
- <User ID="test" Password="test"/>
- <User ID="test2" Password="test2"/>
- <User ID="Baptiste" Password="1234"/>
- <User ID="zsqdcv" Password="sqdcvb "/>
- <User ID="Tom" Password="miaou"/>
- <User ID="Sigrid" Password="moiua"/>
- <User ID="wr,fhn" Password="fgcfb  "/>
- <User ID="test3" Password="test3"/>
- <User ID="zrbff" Password="n Db"/>
- <User ID=" gc" Password="rnbdsr"/>
- <User ID="dn xbc " Password="ndxcc"/>
- <User ID="ry,,wng" Password="nwtd"/>
- <User ID="TEST" Password="TEST"/>
+ <User ID="superuser" Password="password"/>
+ <User ID="simpleuser" Password="password"/>
 </User>

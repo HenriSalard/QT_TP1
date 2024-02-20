@@ -68,7 +68,7 @@ void newUser::on_pushButton_clicked(){
     else{
         User newUser = User(newId.toStdString(), newPassword.toStdString());
         savetoXML(newUser);
-        GestXML::AddUserProfil(newUser,newUser.getProfil("base"));
+        GestXML::AddUserProfil(newUser,newUser.getProfil("BasicProfil"));
 
     }
 

@@ -390,9 +390,13 @@ void GestXML::ChangeUserProfil(User user){
 
 }
 
+/**
+ * @brief Add a profile to a single user in the XML
+ * @param user that will have the profil
+ * @param profil that the user will have
+ */
 void GestXML::AddUserProfil(User user,Profil profil){
 
-    //TODO : finish
     QDomDocument dom("myXML");
     QFile doc_xml("../QT_TP1/myXML/UserProfil.xml");
     if(!doc_xml.open(QIODevice::ReadOnly))
@@ -412,6 +416,39 @@ void GestXML::AddUserProfil(User user,Profil profil){
     QDomElement newNodeTag = dom.createElement(QString("UserProfil"));
     newNodeTag.setAttribute("UserId", QString::fromStdString(user.getId()));
     newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil.getName()));
+
+    QDomElement newProfilNode = dom.createElement(QString("Profil"));
+
+    if(profil.hasRight(Droits::Read)){
+        newProfilNode.setAttribute("Read", QString("true"));
+    }
+    else{
+        newProfilNode.setAttribute("Read", QString("false"));
+    }
+
+    if(profil.hasRight(Droits::Write)){
+        newProfilNode.setAttribute("Write", QString("true"));
+    }
+    else{
+        newProfilNode.setAttribute("Write", QString("false"));
+    }
+
+    if(profil.hasRight(Droits::Create_profils)){
+        newProfilNode.setAttribute("Create_user", QString("true"));
+    }
+    else{
+        newProfilNode.setAttribute("Create_user", QString("false"));
+    }
+
+    if(profil.hasRight(Droits::Manage_profils)){
+        newProfilNode.setAttribute("Manage_users", QString("true"));
+    }
+    else{
+        newProfilNode.setAttribute("Manage_users", QString("false"));
+    }
+
+    //On attribue le profil au noeud userProfil
+    newNodeTag.appendChild(newProfilNode);
 
     docElem.appendChild(newNodeTag);
 

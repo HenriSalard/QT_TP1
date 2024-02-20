@@ -7,7 +7,7 @@ User::User() {
     password = nullptr;
     listProfils = QVector<Profil>();
     listProfils.append(Profil());
-    listProfils[0].setName("base");
+    listProfils[0].setName("BasicProfil");
     listProfils[0].addDroit(Droits::Read);
 }
 
@@ -16,7 +16,7 @@ User::User(string s1, string s2) {
     password = s2;
     listProfils = QVector<Profil>();
     listProfils.append(Profil());
-    listProfils[0].setName("base");
+    listProfils[0].setName("BasicProfil");
     listProfils[0].addDroit(Droits::Read);
 }
 

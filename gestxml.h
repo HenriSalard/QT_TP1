@@ -61,6 +61,11 @@ public:
      */
     static void ChangeUserProfil(User user);
 
+    /**
+    * @brief Add a profile to a single user in the XML
+    * @param user that will have the profil
+    * @param profil that the user will have
+    */
     static void AddUserProfil(User user,Profil profil);
 
 
