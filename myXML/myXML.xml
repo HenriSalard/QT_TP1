@@ -1,4 +1,3 @@
 <User>
  <User ID="superuser" Password="password"/>
- <User ID="simpleuser" Password="password"/>
 </User>

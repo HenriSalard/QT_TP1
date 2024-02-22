@@ -115,3 +115,35 @@ void profils_manager::on_backButton_clicked()
     this->close();
 }
 
+/**
+* @brief Quand ce boutton est cliqué on crée un nouveau profil (après verifications)
+*/
+void profils_manager::on_newButton_clicked(){
+    QString newName = ui->nameEdit->text();
+
+    // On verifie si un nom a été donné au profil
+    if(newName.isEmpty()){
+        QMessageBox::warning(this,"Profils manager", "Merci de donner un nom au profil.");
+    }
+
+    // On verifie si au moins un droit est attribué
+    else{
+        if(!ui->readCB->isChecked() && !ui->writeCB->isChecked()
+            && !ui->manageCB->isChecked() && !ui->createCB->isChecked()){
+            QMessageBox::warning(this,"Profils manager", "Merci de donner au moins un droit.");
+        }
+
+        else{
+            //TODO ajouter la creation du profil
+        }
+    }
+}
+
+
+/**
+* @brief ajoute un profil à un utilisateur
+*/
+void profils_manager::on_changeButton_clicked(){
+    //TODO ICI REMPLIR LE COMBO BOX AVEC LES PROFILS EXISTANTS ET AJOUTER LE PROFIL AU USER
+}
+

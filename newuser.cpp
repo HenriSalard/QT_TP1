@@ -33,8 +33,6 @@ void newUser::savetoXML(User user){
     // On verifie si l'utilisateur n'existe pas deja
     if(!GestXML::UserExistsXML(user)){
 
-        // TODO ajouter un role de base
-
         // On verifie si on arrive à acceder au fichier xml et on sauvegarde l'utilisateur
         switch(GestXML::SaveUserXML(user)){
             case 1 : QMessageBox::critical(this,"Erreur","Impossible d'ouvrir le ficher XML");

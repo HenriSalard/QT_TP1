@@ -31,10 +31,22 @@ private slots:
      */
     void on_accueilButton_clicked();
 
-
+    /**
+    * @brief Quand le bouton deconnexion est clique, on supprime la session et on renvoie à la page de login
+    */
     void on_logOutButton_clicked();
 
     void on_backButton_clicked();
+
+    /**
+     * @brief Quand ce boutton est cliqué on crée un nouveau profil (après verifications)
+     */
+    void on_newButton_clicked();
+
+    /**
+     * @brief ajoute un profil à un utilisateur
+     */
+    void on_changeButton_clicked();
 
 private:
     Ui::profils_manager *ui;

@@ -49,16 +49,9 @@ void Login::on_loginButton_clicked()
 
 void Login::on_createButton_clicked()
 {
-    if(GestXML::CountUserXML() <= 1){
-        newUser* nu = new newUser(nullptr, true);
-        nu->show();
-        this->close();
-    }
-    else{
-        newUser* nu = new newUser(nullptr, false);
-        nu->show();
-        this->close();
-    }
+    newUser* nu = new newUser(nullptr, false);
+    nu->show();
+    this->close();
 
 }
 
