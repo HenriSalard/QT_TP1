@@ -5,13 +5,4 @@
  <UserProfil ProfilName="RW_Database" UserId="superuser">
   <Profil Create_user="false" Manage_users="false" Read="true" Write="true"/>
  </UserProfil>
- <UserProfil ProfilName="Just_Read" UserId="simpleuser">
-  <Profil Create_user="false" Manage_users="false" Read="true" Write="false"/>
- </UserProfil>
- <UserProfil ProfilName="BasicProfil" UserId="henri">
-  <Profil Create_user="false" Manage_users="false" Read="true" Write="false"/>
- </UserProfil>
- <UserProfil ProfilName="BasicProfil" UserId="Zoé">
-  <Profil Create_user="false" Manage_users="false" Read="true" Write="false"/>
- </UserProfil>
 </Profil>

@@ -68,6 +68,12 @@ public:
     */
     static void AddUserProfil(User user,Profil profil);
 
+    /**
+     * @brief Recupere tous les profils du fichier XML
+     * @return tous les profils dans un vecteur
+     */
+    static QVector<Profil> GetAllProfils();
+
 
 };
 

@@ -470,3 +470,15 @@ void GestXML::AddUserProfil(User user,Profil profil){
     return;
 
 }
+
+/**
+* @brief Recupere tous les profils du fichier XML
+* @return tous les profils dans un vecteur
+*/
+QVector<Profil> GestXML::GetAllProfils(){
+
+    qDebug()<<"Test";
+
+    return QVector<Profil>();
+
+}

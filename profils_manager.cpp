@@ -14,8 +14,8 @@ profils_manager::profils_manager(QWidget *parent, Session * session, User select
     ui->setupUi(this);
     this->session = session;
 
-    ui->label->setText(QString("Profils actuels de ")
-                       + QString::fromStdString(selectedUser.getId()));
+    user = new User(selectedUser);
+
     QVector<Profil> vProfils = selectedUser.getListProfils();
     fillTable(vProfils);
 }
@@ -135,6 +135,28 @@ void profils_manager::on_newButton_clicked(){
 
         else{
             //TODO ajouter la creation du profil
+            Profil newProfil;
+            newProfil.setName(newName.toStdString());
+
+            if(ui->readCB->isChecked()){
+                newProfil.addDroit(Droits::Read);
+            }
+            if(ui->writeCB->isChecked()){
+                newProfil.addDroit(Droits::Write);
+            }
+            if(ui->manageCB->isChecked()){
+                newProfil.addDroit(Droits::Manage_profils);
+            }
+            if(ui->createCB->isChecked()){
+                newProfil.addDroit(Droits::Create_profils);
+            }
+
+            GestXML::AddUserProfil(*user,newProfil);
+            ui->tableWidget->clear();
+            user->setListProfils();
+            QVector<Profil> vProfils = user->getListProfils();
+            fillTable(vProfils);
+            QMessageBox::information(this,"Profils manager", "Le profil a bien été ajouté");
         }
     }
 }

@@ -51,6 +51,7 @@ private slots:
 private:
     Ui::profils_manager *ui;
     Session *session;
+    User *user;
 };
 
 #endif // PROFILS_MANAGER_H
