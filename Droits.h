@@ -7,7 +7,7 @@
 enum class Droits{
     Read,
     Write,
-    Create_profils,
+    //Create_profils,
     Manage_profils
 };
 

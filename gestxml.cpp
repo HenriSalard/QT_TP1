@@ -224,9 +224,9 @@ QVector<Profil> GestXML::GetUserProfil(string id){
                 if(Write.toStdString() == "true"){
                     profil.addDroit(Droits::Write);
                 }
-                if(Create_user.toStdString() == "true"){
+                /*if(Create_user.toStdString() == "true"){
                     profil.addDroit(Droits::Create_profils);
-                }
+                }*/
                 if(Manage_users.toStdString() == "true"){
                     profil.addDroit(Droits::Manage_profils);
                 }
@@ -345,12 +345,12 @@ void GestXML::ChangeUserProfil(User user){
                     newProfilNode.setAttribute("Write", QString("false"));
                 }
 
-                if(profil.hasRight(Droits::Create_profils)){
+                /*if(profil.hasRight(Droits::Create_profils)){
                     newProfilNode.setAttribute("Create_user", QString("true"));
                 }
                 else{
                     newProfilNode.setAttribute("Create_user", QString("false"));
-                }
+                }*/
 
                 if(profil.hasRight(Droits::Manage_profils)){
                     newProfilNode.setAttribute("Manage_users", QString("true"));
@@ -433,12 +433,12 @@ void GestXML::AddUserProfil(User user,Profil profil){
         newProfilNode.setAttribute("Write", QString("false"));
     }
 
-    if(profil.hasRight(Droits::Create_profils)){
+    /*if(profil.hasRight(Droits::Create_profils)){
         newProfilNode.setAttribute("Create_user", QString("true"));
     }
     else{
         newProfilNode.setAttribute("Create_user", QString("false"));
-    }
+    }*/
 
     if(profil.hasRight(Droits::Manage_profils)){
         newProfilNode.setAttribute("Manage_users", QString("true"));

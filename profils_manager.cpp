@@ -32,7 +32,7 @@ profils_manager::~profils_manager()
  */
 void profils_manager::fillTable(const QVector<Profil> profils){
     ui->tableWidget->setRowCount(profils.size());
-    ui->tableWidget->setColumnCount(5); // nombre de droits existants + 1
+    ui->tableWidget->setColumnCount(4); // nombre de droits existants + 1
 
     // remplissage du tableau
     for (int i = 0; i < profils.size(); ++i) {
@@ -68,20 +68,20 @@ void profils_manager::fillTable(const QVector<Profil> profils){
             ui->tableWidget->setItem(i, 3, item);
         }
 
-        if(profil.getListDroits().contains(Droits::Create_profils)){
+        /*if(profil.getListDroits().contains(Droits::Create_profils)){
             QTableWidgetItem *item = new QTableWidgetItem(QString("YES"));
             ui->tableWidget->setItem(i, 4, item);
         }
         else{
             QTableWidgetItem *item = new QTableWidgetItem(QString("NO"));
             ui->tableWidget->setItem(i, 4, item);
-        }
+        }*/
     }
 
 
     // Définition des noms des colonnes
     QStringList headerLabels;
-    headerLabels << "Profil" << "Read" << "Write" << "Manage profiles" << "Create profiles";
+    headerLabels << "Profil" << "Read" << "Write" << "Manage profiles" /*<< "Create profiles"*/;
     ui->tableWidget->setHorizontalHeaderLabels(headerLabels);
 
 
@@ -129,7 +129,7 @@ void profils_manager::on_newButton_clicked(){
     // On verifie si au moins un droit est attribué
     else{
         if(!ui->readCB->isChecked() && !ui->writeCB->isChecked()
-            && !ui->manageCB->isChecked() && !ui->createCB->isChecked()){
+            && !ui->manageCB->isChecked() /*&& !ui->createCB->isChecked()*/){
             QMessageBox::warning(this,"Profils manager", "Merci de donner au moins un droit.");
         }
 
@@ -147,9 +147,9 @@ void profils_manager::on_newButton_clicked(){
             if(ui->manageCB->isChecked()){
                 newProfil.addDroit(Droits::Manage_profils);
             }
-            if(ui->createCB->isChecked()){
+            /*if(ui->createCB->isChecked()){
                 newProfil.addDroit(Droits::Create_profils);
-            }
+            }*/
 
             GestXML::AddUserProfil(*user,newProfil);
             ui->tableWidget->clear();

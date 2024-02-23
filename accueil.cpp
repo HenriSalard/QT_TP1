@@ -28,7 +28,7 @@ Accueil::Accueil(QWidget *parent, Session *session)
     ui->profilsButton->setVisible(session->getUsedProfil().hasRight(Droits::Manage_profils));
     ui->readButton->setVisible(session->getUsedProfil().hasRight(Droits::Read));
     ui->writeButton->setVisible(session->getUsedProfil().hasRight(Droits::Write));
-    ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
+    //ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
 
 
 
@@ -47,7 +47,7 @@ void Accueil::on_validateButton_clicked(){
     ui->profilsButton->setVisible(session->getUsedProfil().hasRight(Droits::Manage_profils));
     ui->readButton->setVisible(session->getUsedProfil().hasRight(Droits::Read));
     ui->writeButton->setVisible(session->getUsedProfil().hasRight(Droits::Write));
-    ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
+    //ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
 }
 
 /**
