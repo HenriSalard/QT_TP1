@@ -43,10 +43,6 @@ private slots:
      */
     void on_newButton_clicked();
 
-    /**
-     * @brief ajoute un profil à un utilisateur
-     */
-    void on_changeButton_clicked();
 
 private:
     Ui::profils_manager *ui;

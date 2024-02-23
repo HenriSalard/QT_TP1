@@ -160,12 +160,3 @@ void profils_manager::on_newButton_clicked(){
         }
     }
 }
-
-
-/**
-* @brief ajoute un profil à un utilisateur
-*/
-void profils_manager::on_changeButton_clicked(){
-    //TODO ICI REMPLIR LE COMBO BOX AVEC LES PROFILS EXISTANTS ET AJOUTER LE PROFIL AU USER
-}
-
