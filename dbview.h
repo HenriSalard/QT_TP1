@@ -13,8 +13,16 @@ class DbView : public QDialog
     Q_OBJECT
 
 public:
-    explicit DbView(QWidget *parent = nullptr,Session * session = nullptr);
+    void extracted(Session *&session);
+    explicit DbView(QWidget *parent = nullptr, Session *session = nullptr,
+                    string name = "Test");
     ~DbView();
+
+protected:
+    void fillTable(string dbname);
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::DbView *ui;

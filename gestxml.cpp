@@ -482,3 +482,53 @@ QVector<Profil> GestXML::GetAllProfils(){
     return QVector<Profil>();
 
 }
+
+QVector<QString> GestXML::GetDbProfil(User *user,Profil profil){
+
+    QVector<QString> vPath;
+
+    QDomDocument userXML;
+    QFile xmlFile("../QT_TP1/myXML/UserProfil.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open the file for reading.";
+    }
+    userXML.setContent(&xmlFile);
+    xmlFile.close();
+
+    QDomElement root = userXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    while(node.isNull() == false)
+    {
+        if(node.tagName() == "UserProfil"){
+
+            QString name = node.attribute("ProfilName");
+            QString iduser = node.attribute("UserId");
+
+            QDomElement nodeChild = node.firstChildElement("Profil");
+
+            if("Administrator" == name.toStdString()
+                && "superuser" == iduser.toStdString()){
+
+                QDomElement childPath = nodeChild.firstChildElement("Path");
+
+                while(childPath.tagName() == "Path"){
+                    if(childPath.tagName() == "Path"){
+
+                        QString path = childPath.attribute("path");
+
+                        vPath.append(path);
+
+                    }
+                    childPath = childPath.nextSibling().toElement();
+                }
+
+
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+    return vPath;
+
+}

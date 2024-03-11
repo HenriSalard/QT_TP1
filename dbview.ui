@@ -92,7 +92,7 @@
            <x>10</x>
            <y>30</y>
            <width>581</width>
-           <height>171</height>
+           <height>201</height>
           </rect>
          </property>
          <property name="widgetResizable">
@@ -104,7 +104,7 @@
             <x>0</x>
             <y>0</y>
             <width>579</width>
-            <height>169</height>
+            <height>199</height>
            </rect>
           </property>
           <widget class="QTextEdit" name="textEdit">
@@ -113,11 +113,24 @@
              <x>0</x>
              <y>0</y>
              <width>581</width>
-             <height>171</height>
+             <height>201</height>
             </rect>
            </property>
           </widget>
          </widget>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>490</x>
+           <y>240</y>
+           <width>83</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Valider</string>
+         </property>
         </widget>
        </widget>
       </item>
@@ -126,6 +139,16 @@
         <property name="title">
          <string>Resultats</string>
         </property>
+        <widget class="QTableWidget" name="tableWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>31</y>
+           <width>591</width>
+           <height>241</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>

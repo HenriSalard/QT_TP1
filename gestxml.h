@@ -74,6 +74,8 @@ public:
      */
     static QVector<Profil> GetAllProfils();
 
+    static QVector<QString> GetDbProfil(User *user,Profil profil);
+
 
 };
 
