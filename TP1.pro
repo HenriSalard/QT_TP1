@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     dblist.cpp \
+    dbview.cpp \
     gestxml.cpp \
     accueil.cpp \
     login.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     accueil.h \
     dblist.h \
+    dbview.h \
     droits.h \
     gestxml.h \
     login.h \
@@ -38,6 +40,7 @@ HEADERS += \
 FORMS += \
     accueil.ui \
     dblist.ui \
+    dbview.ui \
     login.ui \
     newuser.ui \
     profils_manager.ui \

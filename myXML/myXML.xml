@@ -1,3 +1,4 @@
 <User>
  <User ID="superuser" Password="password"/>
+ <User ID="test" Password="test"/>
 </User>
