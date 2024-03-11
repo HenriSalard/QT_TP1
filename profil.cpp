@@ -1,10 +1,11 @@
 #include "Profil.h"
 
 /**
- * @brief Create a profil with zero right
+ * @brief Create a profil with zero right and zero database
  */
 Profil::Profil(){
     listDroits = QVector<Droits>();
+    listDB = QVector<QString>();
 }
 
 /**
@@ -31,6 +32,10 @@ void Profil::setName(string nameParam){
  */
 QVector<Droits> Profil::getListDroits(){
     return listDroits;
+}
+
+QVector<QString> Profil::getListDB(){
+    return listDB;
 }
 
 /**

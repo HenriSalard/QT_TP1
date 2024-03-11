@@ -2,6 +2,7 @@
 #include "login.h"
 #include "ui_accueil.h"
 #include "userslist.h"
+#include "dblist.h"
 
 Accueil::Accueil(QWidget *parent)
     : QDialog(parent)
@@ -69,6 +70,11 @@ void Accueil::on_profilsButton_clicked(){
     this->close();
 }
 
+void Accueil::on_readButton_clicked(){
+    DBList* databasesList = new DBList(nullptr, session);
+    databasesList->show();
+    this->close();
+}
 
 Accueil::~Accueil()
 {

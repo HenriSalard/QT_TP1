@@ -13,6 +13,7 @@ class Profil {
 private:
     string name;
     QVector<Droits> listDroits ;
+    QVector<QString> listDB;
 
 public:
 
@@ -38,6 +39,8 @@ public:
     * @return listDroits
     */
     QVector<Droits> getListDroits();
+
+    QVector<QString> getListDB();
 
     /**
      * @brief add rightd to the profil
