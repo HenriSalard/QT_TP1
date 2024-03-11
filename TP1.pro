@@ -10,6 +10,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dbview.cpp \
     gestxml.cpp \
     accueil.cpp \
     login.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     accueil.h \
+    dbview.h \
     droits.h \
     gestxml.h \
     login.h \
@@ -35,6 +37,7 @@ HEADERS += \
 
 FORMS += \
     accueil.ui \
+    dbview.ui \
     login.ui \
     newuser.ui \
     profils_manager.ui \
