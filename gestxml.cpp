@@ -384,6 +384,15 @@ void GestXML::ChangeUserProfil(User user){
                     newProfilNode.setAttribute("Manage_users", QString("false"));
                 }
 
+                for(QString path : profil.getListDB()){
+
+                    QDomElement newPathNode = userProfilXML.createElement(QString("Profil"));
+                    newPathNode.setAttribute("path", path);
+
+                    newProfilNode.appendChild(newPathNode);
+
+                }
+
                 //On attribue le profil au noeud userProfil
                 newNodeTag.appendChild(newProfilNode);
 
@@ -557,3 +566,5 @@ QVector<QString> GestXML::GetDbProfil(User *user,Profil profil){
     return vPath;
 
 }
+
+
