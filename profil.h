@@ -42,10 +42,16 @@ public:
 
     QVector<QString> getListDB();
 
+
+
+    void setListDB(QVector<QString> pathList);
+
+
     /**
      * @brief add rightd to the profil
     * @param droit the right to be added
     */
+
     void addDroit(Droits droit);
 
     /**

@@ -38,6 +38,11 @@ QVector<QString> Profil::getListDB(){
     return listDB;
 }
 
+void Profil::setListDB(QVector<QString> pathList){
+    this->listDB = pathList;
+}
+
+
 /**
  * @brief add rightd to the profil
  * @param droit the right to be added
