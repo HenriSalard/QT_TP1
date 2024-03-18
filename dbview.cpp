@@ -44,12 +44,5 @@ void DbView::on_pushButton_clicked()
 
     QTableWidgetItem *item = new QTableWidgetItem(requete);
     ui->tableWidget_2->setItem(0, 0, item);
-
-    QVector<QString> paths = GestXML::GetDbProfil(session->getUsedUser(),session->getUsedProfil());
-
-    for(QString test : paths){
-        ui->textEdit->append(test);
-    }
-
 }
 

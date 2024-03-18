@@ -6,9 +6,13 @@
   </Profil>
  </UserProfil>
  <UserProfil ProfilName="RW_Database" UserId="superuser">
-  <Profil Create_user="false" Manage_users="false" Read="true" Write="true"/>
+  <Profil Create_user="false" Manage_users="false" Read="true" Write="true">
+   <Path path="testPath/path"/>
+  </Profil>
  </UserProfil>
  <UserProfil ProfilName="BasicProfil" UserId="test">
-  <Profil Manage_users="false" Read="true" Write="false"/>
+  <Profil Manage_users="false" Read="true" Write="false">
+   <Path path="testPath3/path"/>
+  </Profil>
  </UserProfil>
 </Profil>

@@ -186,6 +186,7 @@ unsigned int GestXML::CountUserXML(){
 QVector<Profil> GestXML::GetUserProfil(string id){
 
     QVector<Profil> vProfil;
+    QVector<QString> vPath;
 
     QDomDocument userXML;
     QFile xmlFile("../QT_TP1/myXML/UserProfil.xml");
@@ -203,6 +204,7 @@ QVector<Profil> GestXML::GetUserProfil(string id){
     {
         if(node.tagName() == "UserProfil"){
 
+
             QString idXML = node.attribute("UserId");
             QString name = node.attribute("ProfilName");
 
@@ -210,10 +212,12 @@ QVector<Profil> GestXML::GetUserProfil(string id){
 
             QString Read = nodeChild.attribute("Read");
             QString Write = nodeChild.attribute("Write");
-            QString Create_user = nodeChild.attribute("Create_user");
+            //QString Create_user = nodeChild.attribute("Create_user");
             QString Manage_users = nodeChild.attribute("Manage_users");
 
             if(idXML.toStdString() == id){
+
+                vPath.clear();
 
                 Profil profil;
                 profil.setName(name.toStdString());
@@ -231,7 +235,28 @@ QVector<Profil> GestXML::GetUserProfil(string id){
                     profil.addDroit(Droits::Manage_profils);
                 }
 
+
+
+                QDomElement nodeGrandChild = nodeChild.firstChildElement("Path");
+
+                while(nodeGrandChild.tagName() == "Path"){
+                    if(nodeGrandChild.tagName() == "Path"){
+
+                        QString path = nodeGrandChild.attribute("path");
+                        //qDebug() << path;
+                        vPath.append(path);
+
+                    }
+                    nodeGrandChild = nodeGrandChild.nextSibling().toElement();
+                }
+
+                profil.setListDB(vPath);
+
+
+
                 vProfil.append(profil);
+
+
             }
         }
         node = node.nextSibling().toElement();
@@ -508,8 +533,8 @@ QVector<QString> GestXML::GetDbProfil(User *user,Profil profil){
 
             QDomElement nodeChild = node.firstChildElement("Profil");
 
-            if("Administrator" == name.toStdString()
-                && "superuser" == iduser.toStdString()){
+            if(user->getId() == iduser.toStdString()
+                && profil.getName() == name.toStdString()){
 
                 QDomElement childPath = nodeChild.firstChildElement("Path");
 
