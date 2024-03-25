@@ -386,7 +386,7 @@ void GestXML::ChangeUserProfil(User user){
 
                 for(QString path : profil.getListDB()){
 
-                    QDomElement newPathNode = userProfilXML.createElement(QString("Profil"));
+                    QDomElement newPathNode = userProfilXML.createElement(QString("Path"));
                     newPathNode.setAttribute("path", path);
 
                     newProfilNode.appendChild(newPathNode);

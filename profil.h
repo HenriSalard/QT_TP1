@@ -54,6 +54,8 @@ public:
 
     void addDroit(Droits droit);
 
+    void addListDB(QString newDB);
+
     /**
     * @brief Profil::hasRight Dit si le profil possede le droit renseigné
     * @param droit
