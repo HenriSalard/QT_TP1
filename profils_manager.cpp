@@ -68,14 +68,6 @@ void profils_manager::fillTable(const QVector<Profil> profils){
             ui->tableWidget->setItem(i, 3, item);
         }
 
-        /*if(profil.getListDroits().contains(Droits::Create_profils)){
-            QTableWidgetItem *item = new QTableWidgetItem(QString("YES"));
-            ui->tableWidget->setItem(i, 4, item);
-        }
-        else{
-            QTableWidgetItem *item = new QTableWidgetItem(QString("NO"));
-            ui->tableWidget->setItem(i, 4, item);
-        }*/
     }
 
 

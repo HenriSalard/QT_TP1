@@ -15,6 +15,7 @@ class DBList : public QDialog
 public:
     explicit DBList(QWidget *parent = nullptr);
     explicit DBList(QWidget *parent = nullptr,  Session *session = nullptr);
+    void fillTable(const QVector<QString> pathes);
     ~DBList();
 
     void fillTable();
@@ -22,6 +23,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::DBList *ui;
