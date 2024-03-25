@@ -4,7 +4,7 @@
  * @brief Change the profil of the user
  * @param newUsedProfil
  */
-void Session::setUsedProfil(const Profil &newUsedProfil)
+void Session::setUsedProfil(Profil *newUsedProfil)
 {
     usedProfil = newUsedProfil;
 }
@@ -22,12 +22,13 @@ Session::Session() {}
 
 Session::Session(User *user){
     usedUser = user;
+
 }
 
 /**
  * @brief Session::getUsedProfil
  * @return the current profil of the User
  */
-Profil Session::getUsedProfil() const{
+Profil* Session::getUsedProfil() const{
     return usedProfil;
 }

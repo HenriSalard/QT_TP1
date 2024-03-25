@@ -2,6 +2,7 @@
  <UserProfil ProfilName="Administrator" UserId="superuser">
   <Profil Manage_users="true" Read="true" Write="true">
    <Path path="C:\Users\henri\Downloads\db_exemple.db"/>
+   <Path path="C:/Users/henri/OneDrive/Bureau/Hector.SQLite"/>
   </Profil>
  </UserProfil>
  <UserProfil ProfilName="RW_Database" UserId="superuser">
@@ -11,5 +12,11 @@
   <Profil Manage_users="false" Read="true" Write="false">
    <Path path="testPath3/path"/>
   </Profil>
+ </UserProfil>
+ <UserProfil ProfilName="BasicProfil" UserId="test">
+  <Profil Manage_users="false" Read="true" Write="false"/>
+ </UserProfil>
+ <UserProfil ProfilName="camarche" UserId="test">
+  <Profil Manage_users="false" Read="true" Write="false"/>
  </UserProfil>
 </Profil>

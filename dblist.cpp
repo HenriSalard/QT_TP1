@@ -45,17 +45,24 @@ void DBList::fillTable(const QVector<QString> pathes){
 void DBList::on_pushButton_clicked(){
 
     // Ajout du path de la bdd au profil
+
+
     QString fileName = QFileDialog::getOpenFileName(this,
                   tr("Open database"), "..", tr("*.sqlite *.sqlite3 *.db *.db3 *.s3db *.sl3"));
-    session->getUsedProfil().addListDB(fileName);
-    qDebug() << fileName;
 
-    GestXML::ChangeUserProfil(*session->getUsedUser());
+    if(!fileName.isEmpty()){
+        session->getUsedProfil()->addListDB(fileName);
+        qDebug() << fileName;
+
+        GestXML::ChangeUserProfil(*session->getUsedUser());
 
 
-    // Affichage d'une fenetre de confirmation
-    QFileInfo fi(fileName);
-    QMessageBox::information(this, "Ajouter une base", fi.fileName() + " a bien été ajouté.");
+        // Affichage d'une fenetre de confirmation
+        QFileInfo fi(fileName);
+        QMessageBox::information(this, "Ajouter une base", fi.fileName() + " a bien été ajouté.");
+    }
+
+
 
 }
 

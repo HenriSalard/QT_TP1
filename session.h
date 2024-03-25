@@ -11,7 +11,7 @@ class Session
 {
 private:
     User *usedUser;
-    Profil usedProfil;
+    Profil *usedProfil;
 
 
 public:
@@ -24,7 +24,7 @@ public:
      * @brief Change the profil of the user
     * @param newUsedProfil
     */
-    void setUsedProfil(const Profil &newUsedProfil);
+    void setUsedProfil(Profil *newUsedProfil);
 
     /**
     * @brief Session::getUsedUser
@@ -36,7 +36,7 @@ public:
     * @brief Session::getUsedProfil
     * @return the current profil of the User
     */
-    Profil getUsedProfil() const;
+    Profil* getUsedProfil() const;
 };
 
 #endif // SESSION_H

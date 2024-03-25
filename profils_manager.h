@@ -22,7 +22,7 @@ public:
                              User selectedUser);
     ~profils_manager();
 
-    void fillTable(const QVector<Profil> profils);
+    void fillTable(const QVector<Profil*> profils);
 
 private slots:
 

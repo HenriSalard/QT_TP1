@@ -47,7 +47,7 @@ public:
     * @param id of the user
     * @return vProfil the vector containing all the user's profiles
     */
-    static QVector<Profil> GetUserProfil(string id);
+    static QVector<Profil*> GetUserProfil(string id);
 
      /**
      * @brief Recupere la liste des utilisateurs depuis le fichier XML
@@ -66,7 +66,7 @@ public:
     * @param user that will have the profil
     * @param profil that the user will have
     */
-    static void AddUserProfil(User user,Profil profil);
+    static void AddUserProfil(User user,Profil* profil);
 
     /**
      * @brief Recupere tous les profils du fichier XML
@@ -74,7 +74,7 @@ public:
      */
     static QVector<Profil> GetAllProfils();
 
-    static QVector<QString> GetDbProfil(User *user,Profil profil);
+    static QVector<QString> GetDbProfil(User *user,Profil* profil);
 
 
 };
