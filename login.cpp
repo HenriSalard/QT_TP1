@@ -37,7 +37,7 @@ void Login::on_loginButton_clicked()
             User *newUser = new User(username.toStdString(),password.toStdString());
             newUser->setListProfils();
             Session *session = new Session(newUser);
-
+            session->setUsedProfil(NULL);
             Accueil* accueil = new Accueil(nullptr, session);
             accueil->show();
             this->close();

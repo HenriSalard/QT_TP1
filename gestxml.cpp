@@ -183,9 +183,9 @@ unsigned int GestXML::CountUserXML(){
  * @param id of the user
  * @return vProfil the vector containing all the user's profiles
  */
-QVector<Profil> GestXML::GetUserProfil(string id){
+QVector<Profil*> GestXML::GetUserProfil(string id){
 
-    QVector<Profil> vProfil;
+    QVector<Profil*> vProfil;
     QVector<QString> vPath;
 
     QDomDocument userXML;
@@ -219,20 +219,20 @@ QVector<Profil> GestXML::GetUserProfil(string id){
 
                 vPath.clear();
 
-                Profil profil;
-                profil.setName(name.toStdString());
+                Profil* profil = new Profil();
+                profil->setName(name.toStdString());
 
                 if(Read.toStdString() == "true"){
-                    profil.addDroit(Droits::Read);
+                    profil->addDroit(Droits::Read);
                 }
                 if(Write.toStdString() == "true"){
-                    profil.addDroit(Droits::Write);
+                    profil->addDroit(Droits::Write);
                 }
                 /*if(Create_user.toStdString() == "true"){
                     profil.addDroit(Droits::Create_profils);
                 }*/
                 if(Manage_users.toStdString() == "true"){
-                    profil.addDroit(Droits::Manage_profils);
+                    profil->addDroit(Droits::Manage_profils);
                 }
 
 
@@ -250,7 +250,7 @@ QVector<Profil> GestXML::GetUserProfil(string id){
                     nodeGrandChild = nodeGrandChild.nextSibling().toElement();
                 }
 
-                profil.setListDB(vPath);
+                profil->setListDB(vPath);
 
 
 
@@ -346,24 +346,24 @@ void GestXML::ChangeUserProfil(User user){
             if(idUser.toStdString() == user.getId()){
 
                 //On récupère le bon profil
-                Profil profil = user.getProfil(nameProfil.toStdString());
+                Profil* profil = user.getProfil(nameProfil.toStdString());
 
                 //On crée un nouveau noeud
                 QDomElement newNodeTag = userProfilXML.createElement(QString("UserProfil"));
                 newNodeTag.setAttribute("UserId", QString::fromStdString(user.getId()));
-                newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil.getName()));
+                newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil->getName()));
 
                 //On crée le fils du nouveau noeud
                 QDomElement newProfilNode = userProfilXML.createElement(QString("Profil"));
 
-                if(profil.hasRight(Droits::Read)){
+                if(profil->hasRight(Droits::Read)){
                     newProfilNode.setAttribute("Read", QString("true"));
                 }
                 else{
                     newProfilNode.setAttribute("Read", QString("false"));
                 }
 
-                if(profil.hasRight(Droits::Write)){
+                if(profil->hasRight(Droits::Write)){
                     newProfilNode.setAttribute("Write", QString("true"));
                 }
                 else{
@@ -377,14 +377,14 @@ void GestXML::ChangeUserProfil(User user){
                     newProfilNode.setAttribute("Create_user", QString("false"));
                 }*/
 
-                if(profil.hasRight(Droits::Manage_profils)){
+                if(profil->hasRight(Droits::Manage_profils)){
                     newProfilNode.setAttribute("Manage_users", QString("true"));
                 }
                 else{
                     newProfilNode.setAttribute("Manage_users", QString("false"));
                 }
 
-                for(QString path : profil.getListDB()){
+                for(QString path : profil->getListDB()){
 
                     QDomElement newPathNode = userProfilXML.createElement(QString("Path"));
                     newPathNode.setAttribute("path", path);
@@ -429,7 +429,7 @@ void GestXML::ChangeUserProfil(User user){
  * @param user that will have the profil
  * @param profil that the user will have
  */
-void GestXML::AddUserProfil(User user,Profil profil){
+void GestXML::AddUserProfil(User user,Profil* profil){
 
     QDomDocument dom("myXML");
     QFile doc_xml("../QT_TP1/myXML/UserProfil.xml");
@@ -449,18 +449,18 @@ void GestXML::AddUserProfil(User user,Profil profil){
 
     QDomElement newNodeTag = dom.createElement(QString("UserProfil"));
     newNodeTag.setAttribute("UserId", QString::fromStdString(user.getId()));
-    newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil.getName()));
+    newNodeTag.setAttribute("ProfilName", QString::fromStdString(profil->getName()));
 
     QDomElement newProfilNode = dom.createElement(QString("Profil"));
 
-    if(profil.hasRight(Droits::Read)){
+    if(profil->hasRight(Droits::Read)){
         newProfilNode.setAttribute("Read", QString("true"));
     }
     else{
         newProfilNode.setAttribute("Read", QString("false"));
     }
 
-    if(profil.hasRight(Droits::Write)){
+    if(profil->hasRight(Droits::Write)){
         newProfilNode.setAttribute("Write", QString("true"));
     }
     else{
@@ -474,7 +474,7 @@ void GestXML::AddUserProfil(User user,Profil profil){
         newProfilNode.setAttribute("Create_user", QString("false"));
     }*/
 
-    if(profil.hasRight(Droits::Manage_profils)){
+    if(profil->hasRight(Droits::Manage_profils)){
         newProfilNode.setAttribute("Manage_users", QString("true"));
     }
     else{
@@ -517,7 +517,7 @@ QVector<Profil> GestXML::GetAllProfils(){
 
 }
 
-QVector<QString> GestXML::GetDbProfil(User *user,Profil profil){
+QVector<QString> GestXML::GetDbProfil(User *user,Profil* profil){
 
     QVector<QString> vPath;
 
@@ -543,7 +543,7 @@ QVector<QString> GestXML::GetDbProfil(User *user,Profil profil){
             QDomElement nodeChild = node.firstChildElement("Profil");
 
             if(user->getId() == iduser.toStdString()
-                && profil.getName() == name.toStdString()){
+                && profil->getName() == name.toStdString()){
 
                 QDomElement childPath = nodeChild.firstChildElement("Path");
 

@@ -13,7 +13,7 @@ class User
 private:
     string identifiant;
     string password;
-    QVector<Profil> listProfils;
+    QVector<Profil*> listProfils;
 
 public:
     User();
@@ -24,13 +24,13 @@ public:
 
     string getPassword();
 
-    QVector<Profil> getListProfils();
+    QVector<Profil*> getListProfils();
 
     void setListProfils();
 
-    void addProfil(Profil profilToAdd);
+    void addProfil(Profil* profilToAdd);
 
-    Profil getProfil(string name);
+    Profil* getProfil(string name);
 
 };
 

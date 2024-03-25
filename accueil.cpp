@@ -22,19 +22,24 @@ Accueil::Accueil(QWidget *parent, Session *session)
 {
     ui->setupUi(this);
     this->session = session;
+
     ui->label_2->setText(QString::fromStdString(session->getUsedUser()->getId()));
     ui->label_2->repaint();
+    ui->profilsButton->setVisible(false);
+    ui->readButton->setVisible(false);
+    ui->writeButton->setVisible(false);
 
-    // le bouton des privilèges n'apparaissent que si le profil actuel a les droits
-    ui->profilsButton->setVisible(session->getUsedProfil().hasRight(Droits::Manage_profils));
-    ui->readButton->setVisible(session->getUsedProfil().hasRight(Droits::Read));
-    ui->writeButton->setVisible(session->getUsedProfil().hasRight(Droits::Write));
-    //ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
+    if(session->getUsedProfil() != NULL){
+        // le bouton des privilèges n'apparaissent que si le profil actuel a les droits
+        ui->profilsButton->setVisible(session->getUsedProfil()->hasRight(Droits::Manage_profils));
+        ui->readButton->setVisible(session->getUsedProfil()->hasRight(Droits::Read));
+        ui->writeButton->setVisible(session->getUsedProfil()->hasRight(Droits::Write));
+        //ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
+    }
 
 
-
-    for(Profil profil : session->getUsedUser()->getListProfils()){
-        ui->profilCombo->addItem(QString::fromStdString(profil.getName()));
+    for(Profil* profil : session->getUsedUser()->getListProfils()){
+        ui->profilCombo->addItem(QString::fromStdString(profil->getName()));
     }
 }
 
@@ -45,9 +50,9 @@ Accueil::Accueil(QWidget *parent, Session *session)
 void Accueil::on_validateButton_clicked(){
     int selected_profile_index = ui->profilCombo->currentIndex();
     session->setUsedProfil(session->getUsedUser()->getListProfils()[selected_profile_index]);
-    ui->profilsButton->setVisible(session->getUsedProfil().hasRight(Droits::Manage_profils));
-    ui->readButton->setVisible(session->getUsedProfil().hasRight(Droits::Read));
-    ui->writeButton->setVisible(session->getUsedProfil().hasRight(Droits::Write));
+    ui->profilsButton->setVisible(session->getUsedProfil()->hasRight(Droits::Manage_profils));
+    ui->readButton->setVisible(session->getUsedProfil()->hasRight(Droits::Read));
+    ui->writeButton->setVisible(session->getUsedProfil()->hasRight(Droits::Write));
     //ui->userButton->setVisible(session->getUsedProfil().hasRight(Droits::Create_profils));
 }
 

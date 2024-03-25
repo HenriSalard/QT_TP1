@@ -16,7 +16,7 @@ profils_manager::profils_manager(QWidget *parent, Session * session, User select
 
     user = new User(selectedUser);
 
-    QVector<Profil> vProfils = selectedUser.getListProfils();
+    QVector<Profil*> vProfils = selectedUser.getListProfils();
     fillTable(vProfils);
 }
 
@@ -30,18 +30,18 @@ profils_manager::~profils_manager()
  * @brief Rempli le tableau avec les profils de l'utilisateur selectionne
  * @param profils La liste des profils
  */
-void profils_manager::fillTable(const QVector<Profil> profils){
+void profils_manager::fillTable(const QVector<Profil*> profils){
     ui->tableWidget->setRowCount(profils.size());
     ui->tableWidget->setColumnCount(4); // nombre de droits existants + 1
 
     // remplissage du tableau
     for (int i = 0; i < profils.size(); ++i) {
-        Profil profil = profils[i];
-        QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(profil.getName()));
+        Profil* profil = profils[i];
+        QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(profil->getName()));
         ui->tableWidget->setItem(i, 0, item);
 
         // Definition des droits du profil
-        if(profil.getListDroits().contains(Droits::Read)){
+        if(profil->getListDroits().contains(Droits::Read)){
             QTableWidgetItem *item = new QTableWidgetItem(QString("YES"));
             ui->tableWidget->setItem(i, 1, item);
         }
@@ -50,7 +50,7 @@ void profils_manager::fillTable(const QVector<Profil> profils){
             ui->tableWidget->setItem(i, 1, item);
         }
 
-        if(profil.getListDroits().contains(Droits::Write)){
+        if(profil->getListDroits().contains(Droits::Write)){
             QTableWidgetItem *item = new QTableWidgetItem(QString("YES"));
             ui->tableWidget->setItem(i, 2, item);
         }
@@ -59,7 +59,7 @@ void profils_manager::fillTable(const QVector<Profil> profils){
             ui->tableWidget->setItem(i, 2, item);
         }
 
-        if(profil.getListDroits().contains(Droits::Manage_profils)){
+        if(profil->getListDroits().contains(Droits::Manage_profils)){
             QTableWidgetItem *item = new QTableWidgetItem(QString("YES"));
             ui->tableWidget->setItem(i, 3, item);
         }
@@ -127,17 +127,17 @@ void profils_manager::on_newButton_clicked(){
 
         else{
             //TODO ajouter la creation du profil
-            Profil newProfil;
-            newProfil.setName(newName.toStdString());
+            Profil* newProfil = new Profil();
+            newProfil->setName(newName.toStdString());
 
             if(ui->readCB->isChecked()){
-                newProfil.addDroit(Droits::Read);
+                newProfil->addDroit(Droits::Read);
             }
             if(ui->writeCB->isChecked()){
-                newProfil.addDroit(Droits::Write);
+                newProfil->addDroit(Droits::Write);
             }
             if(ui->manageCB->isChecked()){
-                newProfil.addDroit(Droits::Manage_profils);
+                newProfil->addDroit(Droits::Manage_profils);
             }
             /*if(ui->createCB->isChecked()){
                 newProfil.addDroit(Droits::Create_profils);
@@ -146,7 +146,7 @@ void profils_manager::on_newButton_clicked(){
             GestXML::AddUserProfil(*user,newProfil);
             ui->tableWidget->clear();
             user->setListProfils();
-            QVector<Profil> vProfils = user->getListProfils();
+            QVector<Profil*> vProfils = user->getListProfils();
             fillTable(vProfils);
             QMessageBox::information(this,"Profils manager", "Le profil a bien été ajouté");
         }
