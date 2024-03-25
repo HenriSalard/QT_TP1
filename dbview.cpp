@@ -21,11 +21,11 @@ DbView::~DbView()
 void DbView::fillTable(string dbname){
 
     //TODO Recuperer la table dbname dans sqlite
-    ui->tableWidget->setRowCount(1);
-    ui->tableWidget->setColumnCount(1);
+    ui->dbTable->setRowCount(1);
+    ui->dbTable->setColumnCount(1);
 
     QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(dbname));
-    ui->tableWidget->setItem(0, 0, item);
+    ui->dbTable->setItem(0, 0, item);
 
     //TODO Créer une table avec le bon nombre de colonne et ligne qui correspond aux attributs des tables de la base
 
@@ -39,10 +39,12 @@ void DbView::on_pushButton_clicked()
 
     //TODO Verifier que l'on puisse faire la requete et l'executer
 
-    ui->tableWidget_2->setRowCount(1);
-    ui->tableWidget_2->setColumnCount(1);
+    ui->resultTable->setRowCount(1);
+    ui->resultTable->setColumnCount(1);
 
     QTableWidgetItem *item = new QTableWidgetItem(requete);
-    ui->tableWidget_2->setItem(0, 0, item);
+    ui->resultTable->setItem(0, 0, item);
+
+    //TODO Afficher la table des résultats ou une erreur
 }
 

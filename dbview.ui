@@ -58,7 +58,7 @@
         <property name="title">
          <string>Structure de la base</string>
         </property>
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableWidget" name="dbTable">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -139,7 +139,7 @@
         <property name="title">
          <string>Resultats</string>
         </property>
-        <widget class="QTableWidget" name="tableWidget_2">
+        <widget class="QTableWidget" name="resultTable">
          <property name="geometry">
           <rect>
            <x>5</x>
