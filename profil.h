@@ -42,8 +42,6 @@ public:
 
     QVector<QString> getListDB();
 
-
-
     void setListDB(QVector<QString> pathList);
 
 
@@ -55,6 +53,12 @@ public:
     void addDroit(Droits droit);
 
     void addListDB(QString newDB);
+
+    /**
+     * @brief Remove a database from listDB
+     * @param dbToRemove : int The index of the database to remove in the list
+     */
+    void removeDB(int dbToRemove);
 
     /**
     * @brief Profil::hasRight Dit si le profil possede le droit renseigné

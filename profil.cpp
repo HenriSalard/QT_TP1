@@ -49,6 +49,15 @@ void Profil::addListDB(QString newDB){
 
 
 /**
+     * @brief Remove a database from listDB
+     * @param dbToRemove : int The index of the database to remove in the list
+     */
+void Profil::removeDB(int dbToRemove){
+    listDB.remove(dbToRemove);
+}
+
+
+/**
  * @brief add rightd to the profil
  * @param droit the right to be added
  */

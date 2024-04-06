@@ -35,6 +35,8 @@ private slots:
 
 
 
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+
 private:
     Ui::DBList *ui;
     Session *session;
