@@ -40,12 +40,28 @@ public:
     */
     Profil* getUsedProfil() const;
 
+    /**
+     * @brief Setter de canRead
+     * @param can
+     */
     void setCanRead(bool can);
 
+    /**
+     * @brief Setter de canWrite
+     * @param can
+     */
     void setCanWrite(bool can);
 
+    /**
+     * @brief Getter de canRead
+     * @param can
+     */
     bool getCanRead();
 
+    /**
+     * @brief Getter de canWrite
+     * @param can
+     */
     bool getCanWrite();
 
 };

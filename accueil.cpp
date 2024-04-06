@@ -75,6 +75,11 @@ void Accueil::on_profilsButton_clicked(){
     this->close();
 }
 
+/**
+* @brief Gere le clic sur le bouton read
+* Ouvre la fenetre de liste des bases de données
+* et met l'attribut canRead de session à true
+*/
 void Accueil::on_readButton_clicked(){
 
     // Mise a jour des droits de lecture et d'ecriture dans la session
@@ -86,6 +91,11 @@ void Accueil::on_readButton_clicked(){
     this->close();
 }
 
+/**
+* @brief Gere le clic sur le bouton read
+* Ouvre la fenetre de liste des bases de données
+* et met les attributs canRead et canWrite de session à true
+*/
 void Accueil::on_writeButton_clicked()
 {
     // Mise a jour des droits de lecture et d'ecriture dans la session

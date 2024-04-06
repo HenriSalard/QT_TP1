@@ -48,7 +48,18 @@ class Accueil : public QDialog
          */
         void on_profilsButton_clicked();
 
+        /**
+         * @brief Gere le clic sur le bouton read
+         * Ouvre la fenetre de liste des bases de données
+         * et met l'attribut canRead de session à true
+         */
         void on_readButton_clicked();
+
+        /**
+         * @brief Gere le clic sur le bouton read
+         * Ouvre la fenetre de liste des bases de données
+         * et met les attributs canRead et canWrite de session à true
+         */
         void on_writeButton_clicked();
 };
 
