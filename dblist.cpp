@@ -2,6 +2,7 @@
 #include "ui_dblist.h"
 #include "accueil.h"
 #include "gestxml.h"
+#include "dbview.h"
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -24,7 +25,7 @@ DBList::DBList(QWidget *parent, Session *session)
     ui->setupUi(this);
     this->session = session;
 
-    QVector<QString> vPathes = GestXML::GetDbProfil(session->getUsedUser(), session->getUsedProfil());
+    vPathes = GestXML::GetDbProfil(session->getUsedUser(), session->getUsedProfil());
     fillTable(vPathes);
     };
 
@@ -39,6 +40,18 @@ void DBList::fillTable(const QVector<QString> pathes){
         QFileInfo fi(path_i);
         QTableWidgetItem *item = new QTableWidgetItem(fi.fileName());
         ui->tableWidget->setItem(i, 0, item);
+    }
+}
+
+void DBList::onTableItemClicked(QTableWidgetItem *item) {
+    if (item) {
+        int row = item->row();
+        QString selectedString = vPathes[row];
+
+        // Ouvrir une nouvelle fenêtre en passant l'utilisateur sélectionné
+        DbView* DbViewWindow = new DbView(nullptr, session, selectedString);
+        DbViewWindow->show();
+        this->close();
     }
 }
 

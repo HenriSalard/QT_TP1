@@ -15,11 +15,11 @@ class DbView : public QDialog
 public:
     void extracted(Session *&session);
     explicit DbView(QWidget *parent = nullptr, Session *session = nullptr,
-                    string name = "Test");
+                    QString name = "Test");
     ~DbView();
 
 protected:
-    void fillTable(string dbname);
+    void fillTable(QString dbname);
 
 private slots:
     void on_pushButton_clicked();
