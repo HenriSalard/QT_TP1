@@ -1,7 +1,11 @@
 #include "dbview.h"
-#include "gestxml.h"
+#include "qmessagebox.h"
+#include "qsqldatabase.h"
 #include "session.h"
 #include "ui_dbview.h"
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlField>
 
 DbView::DbView(QWidget *parent, Session* session, QString dbname)
     : QDialog(parent)
@@ -10,26 +14,56 @@ DbView::DbView(QWidget *parent, Session* session, QString dbname)
         ui->setupUi(this);
         this->session = session;
         ui->dbnameLabel->setText(dbname);
-        fillTable(dbname);
+
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(dbname);
+        //db.setDatabaseName("C:/Users/Registered user/Desktop/Hector.SQLite");
+        bool ok = db.open();
+
+        if (!db.open()) {
+            QMessageBox::critical(nullptr, QObject::tr("Cannot open database"),
+                                  QObject::tr("Unable to establish a database connection.\n"
+                                              "Click Cancel to exit."), QMessageBox::Cancel);
+            return;
+        }
+
+        fillTable();
 }
 
 DbView::~DbView()
 {
+    QString connectionName = db.connectionName();
+
+    db.close();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connectionName);
     delete ui;
 }
 
-void DbView::fillTable(QString dbname){
+void DbView::fillTable(){
 
     //TODO Recuperer la table dbname dans sqlite
-    ui->dbTable->setRowCount(1);
+    QStringList ListTable = db.tables(QSql::Tables);
+
+    for(QString table : ListTable){
+        if(table.startsWith("sqlite_")){
+            ListTable.removeOne(table);
+        }
+    }
+
+
+    ui->dbTable->setRowCount(ListTable.length());
     ui->dbTable->setColumnCount(1);
 
-    QTableWidgetItem *item = new QTableWidgetItem(dbname);
-    ui->dbTable->setItem(0, 0, item);
+    for(int table = 0; table < ListTable.length();table++){
+        if(!ListTable.at(table).startsWith("sqlite_")){
+            QTableWidgetItem *item = new QTableWidgetItem(ListTable.at(table));
+            ui->dbTable->setItem(table, 0, item);
+        }
 
-    //TODO Créer une table avec le bon nombre de colonne et ligne qui correspond aux attributs des tables de la base
+    }
 
-    //TODO Remplir la table
+
 
 }
 
@@ -37,14 +71,24 @@ void DbView::on_pushButton_clicked()
 {
     QString requete = ui->textEdit->toPlainText();
 
-    //TODO Verifier que l'on puisse faire la requete et l'executer
+    QSqlQuery query(requete, db);
 
-    ui->resultTable->setRowCount(1);
-    ui->resultTable->setColumnCount(1);
+    /* Execute the query */
+    if (!query.exec()) {
+        qDebug() << "Error executing query:" ;
+        return;
+    }
 
-    QTableWidgetItem *item = new QTableWidgetItem(requete);
-    ui->resultTable->setItem(0, 0, item);
+}
 
-    //TODO Afficher la table des résultats ou une erreur
+
+void DbView::on_dbTable_cellPressed(int row, int column)
+{
+
+    model = new QSqlTableModel(this, db);
+    model->setTable(ui->dbTable->selectedItems().at(0)->text());
+    model->select();
+
+    ui->tableView->setModel(model);
 }
 

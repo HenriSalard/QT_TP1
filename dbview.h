@@ -1,8 +1,10 @@
 #ifndef DBVIEW_H
 #define DBVIEW_H
 
+#include "qsqldatabase.h"
 #include "session.h"
 #include <QDialog>
+#include <QSqlTableModel>
 
 namespace Ui {
 class DbView;
@@ -19,14 +21,18 @@ public:
     ~DbView();
 
 protected:
-    void fillTable(QString dbname);
+    void fillTable();
 
 private slots:
     void on_pushButton_clicked();
 
+    void on_dbTable_cellPressed(int row, int column);
+
 private:
     Ui::DbView *ui;
     Session * session;
+    QSqlDatabase db;
+    QSqlTableModel *model;
 };
 
 #endif // DBVIEW_H
