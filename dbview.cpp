@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlField>
+#include <QFileDialog>
 
 DbView::DbView(QWidget *parent, Session* session, QString dbname)
     : QDialog(parent)
@@ -13,7 +14,8 @@ DbView::DbView(QWidget *parent, Session* session, QString dbname)
 {
         ui->setupUi(this);
         this->session = session;
-        ui->dbnameLabel->setText(dbname);
+        QFileInfo fi(dbname);
+        ui->dbnameLabel->setText(fi.fileName());
 
         db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName(dbname);
