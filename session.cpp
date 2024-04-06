@@ -18,10 +18,15 @@ User* Session::getUsedUser() const
     return usedUser;
 }
 
-Session::Session() {}
+Session::Session() {
+    canRead = false;
+    canRead = true;
+}
 
 Session::Session(User *user){
     usedUser = user;
+    canRead = false;
+    canWrite = false;
 
 }
 
@@ -31,4 +36,20 @@ Session::Session(User *user){
  */
 Profil* Session::getUsedProfil() const{
     return usedProfil;
+}
+
+void Session::setCanRead(bool can){
+    canRead = can;
+}
+
+void Session::setCanWrite(bool can){
+    canWrite = can;
+}
+
+bool Session::getCanRead(){
+    return canRead;
+}
+
+bool Session::getCanWrite(){
+    return canWrite;
 }

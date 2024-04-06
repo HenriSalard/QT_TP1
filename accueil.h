@@ -49,6 +49,7 @@ class Accueil : public QDialog
         void on_profilsButton_clicked();
 
         void on_readButton_clicked();
+        void on_writeButton_clicked();
 };
 
 #endif // ACCUEIL_H

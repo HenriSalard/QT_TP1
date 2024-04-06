@@ -76,6 +76,22 @@ void Accueil::on_profilsButton_clicked(){
 }
 
 void Accueil::on_readButton_clicked(){
+
+    // Mise a jour des droits de lecture et d'ecriture dans la session
+    session->setCanRead(true);
+    session->setCanWrite(false);
+
+    DBList* databasesList = new DBList(nullptr, session);
+    databasesList->show();
+    this->close();
+}
+
+void Accueil::on_writeButton_clicked()
+{
+    // Mise a jour des droits de lecture et d'ecriture dans la session
+    session->setCanRead(true);
+    session->setCanWrite(true);
+
     DBList* databasesList = new DBList(nullptr, session);
     databasesList->show();
     this->close();
@@ -85,3 +101,6 @@ Accueil::~Accueil()
 {
     delete ui;
 }
+
+
+

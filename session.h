@@ -12,6 +12,8 @@ class Session
 private:
     User *usedUser;
     Profil *usedProfil;
+    bool canRead; // True si l'utilisateur a cliqué sur lire ou ecrire
+    bool canWrite; // True si l'utilisateur a cliqué sur ecrire
 
 
 public:
@@ -37,6 +39,15 @@ public:
     * @return the current profil of the User
     */
     Profil* getUsedProfil() const;
+
+    void setCanRead(bool can);
+
+    void setCanWrite(bool can);
+
+    bool getCanRead();
+
+    bool getCanWrite();
+
 };
 
 #endif // SESSION_H
