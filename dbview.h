@@ -5,6 +5,7 @@
 #include "session.h"
 #include <QDialog>
 #include <QSqlTableModel>
+#include <dblist.h>
 
 namespace Ui {
 class DbView;
@@ -27,6 +28,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_dbTable_cellPressed(int row, int column);
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::DbView *ui;

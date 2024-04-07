@@ -48,14 +48,34 @@
        </item>
        <item>
         <widget class="QGroupBox" name="groupBox">
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="title">
           <string>Structure de la base</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QTableWidget" name="dbTable"/>
+           <widget class="QTableWidget" name="dbTable">
+            <property name="maximumSize">
+             <size>
+              <width>423</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>Retour</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -76,38 +96,29 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="widgetResizable">
-             <bool>true</bool>
+           <widget class="QTextEdit" name="textEdit">
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContents</enum>
             </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>428</width>
-               <height>187</height>
-              </rect>
-             </property>
-             <widget class="QTextEdit" name="textEdit">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>581</width>
-                <height>201</height>
-               </rect>
-              </property>
-             </widget>
-            </widget>
            </widget>
           </item>
-          <item alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Valider</string>
-            </property>
-           </widget>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item alignment="Qt::AlignLeft">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignRight">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Valider</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>

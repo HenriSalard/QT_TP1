@@ -1,4 +1,5 @@
 #include "dbview.h"
+#include "qelapsedtimer.h"
 #include "qmessagebox.h"
 #include "qsqldatabase.h"
 #include "session.h"
@@ -7,6 +8,8 @@
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QFileDialog>
+#include <QSqlError>
+#include <QSqlQueryModel>
 
 DbView::DbView(QWidget *parent, Session* session, QString dbname)
     : QDialog(parent)
@@ -16,11 +19,17 @@ DbView::DbView(QWidget *parent, Session* session, QString dbname)
         this->session = session;
         QFileInfo fi(dbname);
         ui->dbnameLabel->setText(fi.fileName());
+        ui->label->setText("Pas encore de requête");
+
+        ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
 
         db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName(dbname);
+        if(!session->getCanWrite()){
+            db.setConnectOptions("QSQLITE_OPEN_READONLY");
+        }
         //db.setDatabaseName("C:/Users/Registered user/Desktop/Hector.SQLite");
-        bool ok = db.open();
+        db.open();
 
         if (!db.open()) {
             QMessageBox::critical(nullptr, QObject::tr("Cannot open database"),
@@ -28,6 +37,8 @@ DbView::DbView(QWidget *parent, Session* session, QString dbname)
                                               "Click Cancel to exit."), QMessageBox::Cancel);
             return;
         }
+
+
 
         fillTable();
 }
@@ -73,13 +84,28 @@ void DbView::on_pushButton_clicked()
 {
     QString requete = ui->textEdit->toPlainText();
 
-    QSqlQuery query(requete, db);
+    QSqlQuery query(db);
+
+    QElapsedTimer timer;
+    timer.start();
 
     /* Execute the query */
-    if (!query.exec()) {
-        qDebug() << "Error executing query:" ;
+    if (!query.exec(requete)) {
+
+        QMessageBox::critical(nullptr, QObject::tr("Requete érronée : ") + query.lastError().nativeErrorCode(),
+                              "Erreur : \n" + query.lastError().databaseText() +
+                              "\n" + query.lastError().driverText(), QMessageBox::Ok);
         return;
     }
+
+    model = new QSqlTableModel();
+    model->setQuery(std::move(query));
+    model->select();
+
+    ui->tableView->setModel(model);
+
+    ui->label->setText("Temps d'éxécution : " + QString::number(timer.elapsed()) + "ms");
+
 
 }
 
@@ -87,10 +113,23 @@ void DbView::on_pushButton_clicked()
 void DbView::on_dbTable_cellPressed(int row, int column)
 {
 
+    qDebug() << row << " : " << column;
+
     model = new QSqlTableModel(this, db);
     model->setTable(ui->dbTable->selectedItems().at(0)->text());
     model->select();
 
     ui->tableView->setModel(model);
+}
+
+
+void DbView::on_pushButton_2_clicked()
+{
+    QString dbname = db.databaseName();
+    db.close();
+    QSqlDatabase::removeDatabase(dbname);
+    DBList *dblist = new DBList(nullptr, session);
+    dblist->show();
+    this->close();
 }
 
