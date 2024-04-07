@@ -16,12 +16,14 @@ class DbView : public QDialog
     Q_OBJECT
 
 public:
-    void extracted(Session *&session);
     explicit DbView(QWidget *parent = nullptr, Session *session = nullptr,
                     QString name = "Test");
     ~DbView();
-
+    
 protected:
+    /**
+     * @brief Remplit la table des noms des tables de la base de données
+     */
     void fillTable();
 
 private slots:
