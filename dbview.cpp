@@ -128,6 +128,8 @@ void DbView::on_pushButton_clicked()
         QMessageBox::information(nullptr, QObject::tr("Requete terminée"),
                               "Votre requete a bien été réalisé.\n"
                                  "Ligne(s) modifiée(s) : " + QString::number(affected), QMessageBox::Ok);
+        ui->dbTable->clear();
+        fillTable();
     }
 
 
