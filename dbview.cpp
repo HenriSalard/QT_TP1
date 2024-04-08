@@ -35,8 +35,6 @@ DbView::DbView(QWidget *parent, Session* session, QString dbname)
         }
 
         //On ouvre la connexion à la base de données
-        db.open();
-
         //Si la connexion échoue
         if (!db.open()) {
 
@@ -156,6 +154,7 @@ void DbView::on_pushButton_2_clicked()
 {
     QString dbname = db.databaseName();
     db.close();
+    db = QSqlDatabase();
     QSqlDatabase::removeDatabase(dbname);
     DBList *dblist = new DBList(nullptr, session);
     dblist->show();
